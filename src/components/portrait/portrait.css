@@ -1,0 +1,7 @@
+#portraitphotos {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 30px;
+  gap: 10px;
+  justify-content: space-around;
+}
