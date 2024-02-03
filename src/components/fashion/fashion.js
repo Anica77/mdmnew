@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
+import supabase from "../Supabase";
+import "./fashion.css";
 
 const Fashion = () => {
-  const supabaseUrl = process.env.REACT_APP_DATABASE_URL;
-  const supabaseKey = process.env.REACT_APP_DATABASE_ANOK;
-
-  const supabase = createClient(supabaseUrl, supabaseKey);
   const [images, setImages] = useState([]);
 
   useEffect(() => {
@@ -31,6 +28,7 @@ const Fashion = () => {
           <img
             key={image.id}
             alt=''
+            style={{ height: "650px", width: "500px" }}
             src={`https://ieqxnbaivrturiczktvu.supabase.co/storage/v1/object/public/fashionphotos/${image.name}`}
           />
         ))}

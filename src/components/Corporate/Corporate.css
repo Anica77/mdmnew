@@ -1,0 +1,29 @@
+/* #corporatephotos {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 30px;
+  gap: 10px;
+  justify-content: space-around;
+} */
+.corporate_container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.corporate_packages {
+  display: flex;
+  justify-content: space-around;
+}
+
+ul {
+  text-align: left;
+}
+
+li {
+  margin: 5px;
+}
+
+.innerbox_package {
+  padding: 20px;
+  /* border: 1px solid black; */
+}
