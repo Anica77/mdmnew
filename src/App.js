@@ -6,6 +6,7 @@ import Fashion from "./components/fashion/fashion";
 import Portrait from "./components/portrait/portrait";
 import Navbar from "./components/Navbar/Navbar";
 import About from "./components/about/about";
+import Cart from "./components/cart/cart";
 import "./App.css";
 
 function App() {
@@ -18,7 +19,9 @@ function App() {
           <Route path='/corporate' element={<Corporate />} />
           <Route exact path='/portraits' element={<Portrait />} />
           <Route path='/fashion' element={<Fashion />} />
+          <Route path='/events' />
           <Route path='/about' element={<About />} />
+          <Route path='/cart' element={<Cart />} />
         </Routes>
       </Router>
     </div>

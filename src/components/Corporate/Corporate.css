@@ -14,6 +14,9 @@
   display: flex;
   justify-content: space-around;
 }
+#package1 {
+  display: flex;
+}
 
 ul {
   text-align: left;
