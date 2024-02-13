@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import supabase from "../Supabase";
+import { Link } from "react-router-dom";
 import "./fashion.css";
 
 const Fashion = () => {
@@ -128,13 +129,28 @@ const Fashion = () => {
           and we recommend it for best result, it is possible to exclude this
           service from your package, upon request.
         </p>
-        <p>Just email us at quote@creativecaptureph.com</p>
+        <p>
+          Just email us at{" "}
+          <Link
+            onClick={() =>
+              (window.location = "mailto:quote@creativecaptureph.com")
+            }
+          >
+            quote@creativecaptureph.com
+          </Link>
+        </p>
       </div>
       <div>
         <p>
           We understand that every project is unique. Email us a few words about
-          your project and deadlines to get your quote at
-          quote@creativecaptureph.com
+          your project and deadlines to get your quote at{" "}
+          <Link
+            onClick={() =>
+              (window.location = "mailto:quote@creativecaptureph.com")
+            }
+          >
+            quote@creativecaptureph.com
+          </Link>
         </p>
       </div>
       {/* <div id='fashionphotos'>
