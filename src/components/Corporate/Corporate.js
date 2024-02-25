@@ -3,7 +3,7 @@ import supabase from "../Supabase";
 import { Link } from "react-router-dom";
 import "./Corporate.css";
 
-const Corporate = () => {
+const Corporate = (uniqueId) => {
   const [data, setData] = useState([]);
   const [cartItems, setCartItems] = useState();
 
@@ -57,7 +57,8 @@ const Corporate = () => {
     try {
       // Check if the product already exists in the cart
       const existingCartItem = cartItems.find(
-        (item) => item.productId === product.id
+        (item) =>
+          item.productId === product.id && item.userId === uniqueId.uniqueId
       );
       console.log("existing cart item", existingCartItem);
 
@@ -68,7 +69,7 @@ const Corporate = () => {
           .from("cart")
           .update({ quantity: updatedQuantity })
           .eq("id", existingCartItem.id); // Assuming you have an 'id' column in your cart table
-
+        console.log("DATA", data);
         if (error) {
           throw error;
         }
@@ -88,6 +89,7 @@ const Corporate = () => {
             name: product.productName,
             price: product.price,
             quantity: +1,
+            userId: uniqueId.uniqueId,
           },
         ]);
 
@@ -102,29 +104,6 @@ const Corporate = () => {
       console.error("Error adding product to cart:", error.message);
     }
   };
-
-  // const addToCart = async (product) => {
-  //   try {
-  //     // Add the product to the cart in Supabase
-  //     const { data, error } = await supabase.from("cart").insert([
-  //       {
-  //         productId: product.id,
-  //         name: product.productName,
-  //         price: product.price,
-  //         quantity: +1,
-  //       },
-  //     ]);
-
-  //     if (error) {
-  //       throw error;
-  //     }
-
-  //     // Update the local state with the new cart items
-  //     setCartItems([...cartItems, data[0]]);
-  //   } catch (error) {
-  //     console.error("Error adding product to cart:", error.message);
-  //   }
-  // };
 
   const firstRow = data.slice(0, 3);
   const secondRow = data.slice(3, 6);
