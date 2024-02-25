@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { setUniqueCookie, getCookie } from "./cookies";
+import {
+  setUniqueSessionStorageItem,
+  getSessionStorageItem,
+} from "./sessionStorageUtils";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Corporate from "./components/Corporate/Corporate";
@@ -14,10 +17,10 @@ function App() {
   const [uniqueId, setUniqueId] = useState("");
 
   useEffect(() => {
-    setUniqueCookie("unique_id", 1);
-    const idFromCookie = getCookie("unique_id");
-    if (idFromCookie) {
-      setUniqueId(idFromCookie);
+    setUniqueSessionStorageItem("unique_id");
+    const idFromSessionStorage = getSessionStorageItem("unique_id");
+    if (idFromSessionStorage) {
+      setUniqueId(idFromSessionStorage);
     }
   }, []);
 

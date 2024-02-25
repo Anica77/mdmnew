@@ -1,31 +1,40 @@
 import React, { useEffect, useState } from "react";
 import supabase from "../Supabase";
 import { Link } from "react-router-dom";
+import Package from "../package/package";
 import "./fashion.css";
 
-const Fashion = () => {
-  const [images, setImages] = useState([]);
+const Fashion = (uniqueId) => {
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    async function getMedia() {
-      const { data, error } = await supabase.storage
-        .from("fashionphotos")
-        .list();
-      if (data) {
-        setImages(data);
-      } else {
-        console.log(71, error);
+    const fetchData = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("fashionproducts")
+          .select("*");
+
+        if (error) {
+          throw error;
+        }
+
+        setData(data);
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
       }
-    }
-    getMedia();
-    // eslint-disable-next-line
+    };
+
+    fetchData();
   }, []);
 
   return (
     <div className='fashion_container'>
       <h2>Fashion Gallery</h2>
       <div className='fashion_packages'>
-        <div id='package1'>
+        {data.map((product) => (
+          <Package key={product.id} uniqueId={uniqueId} product={product} />
+        ))}
+        {/* <div id='package1'>
           <div className='innerbox_package'>
             <img
               alt=''
@@ -48,8 +57,8 @@ const Fashion = () => {
             </ul>
             <button>Purchase</button>
           </div>
-        </div>
-        <div id='package2'>
+        </div> */}
+        {/* <div id='package2'>
           <div className='innerbox_package'>
             <img
               alt=''
@@ -70,8 +79,8 @@ const Fashion = () => {
             </ul>
             <button>Purchase</button>
           </div>
-        </div>
-        <div id='package3'>
+        </div> */}
+        {/* <div id='package3'>
           <div className='innerbox_package'>
             <img
               alt=''
@@ -95,8 +104,8 @@ const Fashion = () => {
             </ul>
             <button>Purchase</button>
           </div>
-        </div>
-        <div id='package4'>
+        </div> */}
+        {/* <div id='package4'>
           <div className='innerbox_package'>
             <img
               alt=''
@@ -121,7 +130,7 @@ const Fashion = () => {
             </ul>
             <button>Purchase</button>
           </div>
-        </div>
+        </div> */}
       </div>
       <div>
         <p>

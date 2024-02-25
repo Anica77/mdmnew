@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import supabase from "../Supabase";
 import { Link } from "react-router-dom";
 import "./Corporate.css";
+import Package from "../package/package";
 
 const Corporate = (uniqueId) => {
   const [data, setData] = useState([]);
-  const [cartItems, setCartItems] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,86 +25,6 @@ const Corporate = (uniqueId) => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const fetchCartItems = async () => {
-      try {
-        // Fetch the current cart items from Supabase
-        const { data: cartItems, error } = await supabase
-          .from("cart")
-          .select("*");
-
-        if (error) {
-          throw error;
-        }
-
-        setCartItems(cartItems || []);
-      } catch (error) {
-        console.error("Error fetching cart items:", error.message);
-      }
-    };
-
-    fetchCartItems(); // Fetch cart items when the component mounts
-
-    // Clean-up function to unsubscribe when the component unmounts
-    return () => {
-      // Optionally clean up any subscriptions or resources here
-    };
-  }, [cartItems]);
-
-  const addToCart = async (product) => {
-    console.log("cartItems", cartItems);
-    console.log("product", product);
-    try {
-      // Check if the product already exists in the cart
-      const existingCartItem = cartItems.find(
-        (item) =>
-          item.productId === product.id && item.userId === uniqueId.uniqueId
-      );
-      console.log("existing cart item", existingCartItem);
-
-      if (existingCartItem) {
-        // If the product already exists, update its quantity
-        const updatedQuantity = existingCartItem.quantity + 1;
-        const { data, error } = await supabase
-          .from("cart")
-          .update({ quantity: updatedQuantity })
-          .eq("id", existingCartItem.id); // Assuming you have an 'id' column in your cart table
-        console.log("DATA", data);
-        if (error) {
-          throw error;
-        }
-
-        // Update the local state with the updated cart items
-        const updatedCartItems = cartItems.map((item) =>
-          item.id === existingCartItem.id
-            ? { ...item, quantity: updatedQuantity }
-            : item
-        );
-        setCartItems(updatedCartItems);
-      } else {
-        // If the product doesn't exist, insert a new record
-        const { data, error } = await supabase.from("cart").insert([
-          {
-            productId: product.id,
-            name: product.productName,
-            price: product.price,
-            quantity: +1,
-            userId: uniqueId.uniqueId,
-          },
-        ]);
-
-        if (error) {
-          throw error;
-        }
-
-        // Update the local state with the new cart items
-        setCartItems([...cartItems, data[0]]);
-      }
-    } catch (error) {
-      console.error("Error adding product to cart:", error.message);
-    }
-  };
-
   const firstRow = data.slice(0, 3);
   const secondRow = data.slice(3, 6);
 
@@ -115,41 +35,7 @@ const Corporate = (uniqueId) => {
         <div className='corporate_packages'>
           <div id='package1'>
             {firstRow.map((product) => (
-              <div key={product.id}>
-                <img
-                  src={product.imageUrl}
-                  alt=''
-                  style={{ height: "450px", width: "300px" }}
-                />
-                <h6>{product.productName}</h6>
-                <p>${product.price}</p>
-                <ul>
-                  {product.productDes.map((des) => (
-                    <li key={des}>{des}</li>
-                  ))}
-                </ul>
-                {product.price === "400" ? (
-                  <div>
-                    <button>ADD Hair and Make up Artist</button>
-                    <p>
-                      Available upon request at least 48 Hours prior to your
-                      shoot.
-                    </p>
-                  </div>
-                ) : (
-                  ""
-                )}
-                {/* Adding quantity button later */}
-                <button>Add additional images</button>
-                <p>$25 per image</p>
-                <button
-                  onClick={() => {
-                    addToCart(product);
-                  }}
-                >
-                  Purchase
-                </button>
-              </div>
+              <Package key={product.id} uniqueId={uniqueId} product={product} />
             ))}
           </div>
         </div>
@@ -176,21 +62,7 @@ const Corporate = (uniqueId) => {
       <div className='corporate_packages'>
         <div id='package1'>
           {secondRow.map((product) => (
-            <div key={product.id}>
-              <img
-                src={product.imageUrl}
-                alt=''
-                style={{ height: "450px", width: "300px" }}
-              />
-              <h6>{product.productName}</h6>
-              <p>${product.price}</p>
-              <ul>
-                {product.productDes.map((des) => (
-                  <li key={des}>{des}</li>
-                ))}
-              </ul>
-              <button>Purchase</button>
-            </div>
+            <Package key={product.id} uniqueId={uniqueId} product={product} />
           ))}
         </div>
       </div>
