@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { setUniqueCookie, getCookie } from "./cookies";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Corporate from "./components/Corporate/Corporate";
@@ -10,18 +11,35 @@ import Cart from "./components/cart/cart";
 import "./App.css";
 
 function App() {
+  const [uniqueId, setUniqueId] = useState("");
+
+  useEffect(() => {
+    setUniqueCookie("unique_id", 1);
+    const idFromCookie = getCookie("unique_id");
+    if (idFromCookie) {
+      setUniqueId(idFromCookie);
+    }
+  }, []);
+
   return (
     <div className='App'>
       <Router>
         <Navbar />
         <Routes>
-          <Route exact path='/' element={<Home />} />
-          <Route path='/corporate' element={<Corporate />} />
-          <Route exact path='/portraits' element={<Portrait />} />
-          <Route path='/fashion' element={<Fashion />} />
-          <Route path='/events' />
+          <Route exact path='/' element={<Home uniqueId={uniqueId} />} />
+          <Route
+            path='/corporate'
+            element={<Corporate uniqueId={uniqueId} />}
+          />
+          <Route
+            exact
+            path='/portraits'
+            element={<Portrait uniqueId={uniqueId} />}
+          />
+          <Route path='/fashion' element={<Fashion uniqueId={uniqueId} />} />
+          <Route path='/events' uniqueId={uniqueId} />
           <Route path='/about' element={<About />} />
-          <Route path='/cart' element={<Cart />} />
+          <Route path='/cart' element={<Cart uniqueId={uniqueId} />} />
         </Routes>
       </Router>
     </div>
