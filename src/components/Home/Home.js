@@ -26,7 +26,7 @@ function Home() {
                 return prevIndex;
               }
             });
-          }, 10000);
+          }, 7000);
 
           return () => clearInterval(intervalId);
         }
@@ -61,24 +61,44 @@ function Home() {
   useEffect(() => {
     if (!isLoading) {
       const currentImageUrl = images[imageIndex]?.name;
-      const body = document.body;
+      const backgroundContainer = document.getElementById(
+        "background-container"
+      );
 
       // Fade out effect
-      body.style.transition = "background-image 1s ease-out";
-      body.style.opacity = 0;
+      backgroundContainer.style.transition = "opacity 1s ease-out";
+      backgroundContainer.style.opacity = 0;
 
       setTimeout(() => {
         // Change background image
-        body.style.backgroundImage = `url(https://ieqxnbaivrturiczktvu.supabase.co/storage/v1/object/public/homepagebackground/${currentImageUrl})`;
+        backgroundContainer.style.backgroundImage = `url(https://ieqxnbaivrturiczktvu.supabase.co/storage/v1/object/public/homepagebackground/${currentImageUrl})`;
+        backgroundContainer.style.backgroundSize = "cover";
 
         // Fade in effect
-        body.style.transition = "background-image 1s ease-in";
-        body.style.opacity = 1;
+        requestAnimationFrame(() => {
+          backgroundContainer.style.transition = "opacity 1s ease-in";
+          backgroundContainer.style.opacity = 1;
+        });
       }, 1000); // Wait for 1 second for fade-out effect to complete
     }
   }, [imageIndex, images, isLoading]);
 
-  return isLoading ? <div>Loading...</div> : null;
+  return (
+    <>
+      {isLoading ? <div>Loading...</div> : null}
+      <div
+        id='background-container'
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          zIndex: -1,
+        }}
+      ></div>
+    </>
+  );
 }
 
 export default Home;
