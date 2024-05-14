@@ -1,38 +1,23 @@
-/* ReviewCarousel CSS */
-.review-carousel {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
+.reviewBody {
+  font-family: Baskervville, sans-serif;
 }
-
-.reviews {
+.reviewContainer {
+  font-family: Baskervville, sans-serif;
   display: flex;
-
-  transition: transform 0.5s ease;
+  align-items: center;
+  flex-direction: row;
+  margin: 20px;
 }
 
-.review {
-  flex: 0 0 100%; /* Each review takes full width of carousel viewport */
-  padding: 30px; /* Add padding for better readability */
-  min-width: 100%; /* Ensure each review takes full width */
+.reviewText {
+  text-align: center;
+  flex-grow: 1; /* Take up remaining space */
 }
 
-.prev-btn,
-.next-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
+button {
+  font-size: 40px; /* Adjust font size as needed */
+  padding: 10px 20px; /* Adjust padding as needed */
+  background-color: transparent;
   border: none;
-  padding: 10px;
   cursor: pointer;
-}
-
-.prev-btn {
-  left: 0;
-}
-
-.next-btn {
-  right: 0;
 }
