@@ -1,32 +1,81 @@
-/* #corporatephotos {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 30px;
-  gap: 10px;
-  justify-content: space-around;
-} */
 .corporate_container {
+  font-family: Baskervville, sans-serif;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
+  text-align: center;
 }
-.corporate_packages {
-  display: flex;
-  justify-content: space-around;
-}
-#package1 {
-  display: flex;
+.corporate_container p {
+  font-size: larger;
 }
 
-ul {
-  text-align: left;
+.banner {
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  position: relative;
+}
+.banner-text {
+  position: absolute;
+  font-family: Baskervville, sans-serif;
+  top: 50%; /* Align text vertically in the middle */
+  left: 50%; /* Align text horizontally in the middle */
+  transform: translate(-50%, -50%); /* Center text */
+  color: rgb(237, 233, 233); /* Light gray color */
+  font-size: 80px !important;
+  font-weight: bolder; /* Bold font weight */
+  text-align: center; /* Center-align text */
+  padding-bottom: 10%;
 }
 
-li {
-  margin: 5px;
+.text {
+  margin: 5%;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(
+    3,
+    minmax(400px, 1fr)
+  ); /* Adjust the minimum width as needed */
+  place-items: center;
+  margin-left: 15%;
+  margin-right: 11%;
+  /* justify-content: center; */
 }
 
-.innerbox_package {
-  padding: 20px;
-  /* border: 1px solid black; */
+.grid-item img {
+  width: 430px; /* Allow images to maintain their aspect ratio */
+  max-width: 430px; /* Ensure images don't exceed their container's width */
+  height: auto; /* Allow images to maintain their aspect ratio */
+  max-height: 630px; /* Set a maximum height for images */
+  display: block;
+  margin-bottom: 7px;
+}
+
+button {
+  background-color: white;
+  font-family: Baskervville, sans-serif;
+  color: black;
+  border: 1px solid black;
+  width: fit-content;
+  margin: 0 auto;
+  display: block;
+}
+
+.grid-item {
+  position: relative;
+}
+
+.image-wrapper {
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0); /* Adjust transparency as needed */
+  pointer-events: none; /* Allow clicks to pass through the overlay */
 }

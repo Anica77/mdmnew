@@ -1,0 +1,36 @@
+.contactContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.about {
+  display: flex;
+  justify-content: space-around;
+  font-family: Baskervville, sans-serif;
+  padding-top: 5%;
+}
+
+.aboutText {
+  padding-right: 20px; /* Add space between text and image */
+  max-width: 500px;
+  font-size: larger;
+  text-align: justify;
+}
+
+.aboutImage {
+  width: 500px;
+  height: 650px;
+}
+
+.footer {
+  background-color: lightgray;
+  height: 50px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 10px;
+}
+
+.footer a {
+  margin: 20px;
+}

@@ -1,32 +1,47 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
-import { ShoppingCart } from "phosphor-react";
 
-const Navbar = () => {
+const Navbar = ({ totalQuantity }) => {
+  const location = useLocation();
+
   return (
     <nav className='nav-links'>
-      <Link to='/'>
-        <img src='CClogotrans.png' alt='logo' width='60' height='60'></img>
-      </Link>
-      <Link className='link' to='/corporate'>
-        Corporate
-      </Link>
-      <Link className='link' to='/fashion'>
-        Fashion and Beauty
-      </Link>
-      <Link className='link' to='/portraits'>
-        Portraits
-      </Link>
-      <Link className='link' to='/events'>
-        Events
-      </Link>
-      <Link className='link' to='/about'>
-        About
-      </Link>
-      <Link className='link' to='/cart'>
-        <ShoppingCart size={32} />
-      </Link>
+      <div className='logo-container'>
+        <Link to='/' className='logo-link'>
+          <img src='CClogotrans.png' alt='logo' className='logo-image'></img>
+        </Link>
+      </div>
+      <div className='right-links'>
+        <Link
+          className={`link ${
+            location.pathname === "/corporate" ? "active" : ""
+          }`}
+          to='/corporate'
+        >
+          Business
+        </Link>
+        <Link
+          className={`link ${location.pathname === "/fashion" ? "active" : ""}`}
+          to='/fashion'
+        >
+          Fashion and Beauty
+        </Link>
+        <Link
+          className={`link ${
+            location.pathname === "/portraits" ? "active" : ""
+          }`}
+          to='/portraits'
+        >
+          Portraits
+        </Link>
+        <Link
+          className={`link ${location.pathname === "/about" ? "active" : ""}`}
+          to='/about'
+        >
+          Contact
+        </Link>
+      </div>
     </nav>
   );
 };

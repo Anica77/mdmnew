@@ -1,16 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import supabase from "../Supabase";
-import { Link } from "react-router-dom";
+import Masonry from "masonry-layout";
 import "./Corporate.css";
-import Package from "../package/package";
+import QuoteForm from "../quoteForm/QuoteForm";
+import banner from "./IMG_5757.jpg";
 
-const Corporate = (uniqueId) => {
+const Corporate = () => {
   const [data, setData] = useState([]);
+  const gridRef = useRef(null);
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
+    const masonry = new Masonry(gridRef.current, {
+      itemSelector: ".grid-item",
+      columnWidth: ".grid-sizer",
+      gutter: 10,
+      // columnWidth: 60,
+      // Adjust the gap between images
+    });
+
+    return () => {
+      masonry.destroy();
+    };
+  }, [data]);
+
+  useEffect(() => {
+    const getImages = async () => {
       try {
-        const { data, error } = await supabase.from("products").select("*");
+        const { data, error } = await supabase.storage
+          .from("corporatephotos")
+          .list();
 
         if (error) {
           throw error;
@@ -22,65 +49,53 @@ const Corporate = (uniqueId) => {
       }
     };
 
-    fetchData();
+    getImages();
   }, []);
-
-  const firstRow = data.slice(0, 3);
-  const secondRow = data.slice(3, 6);
 
   return (
     <div>
       <div className='corporate_container'>
-        <h2>Business</h2>
-        <div className='corporate_packages'>
-          <div id='package1'>
-            {firstRow.map((product) => (
-              <Package key={product.id} uniqueId={uniqueId} product={product} />
-            ))}
-          </div>
+        <div className='banner' style={{ backgroundImage: `url(${banner})` }}>
+          <p className='banner-text'>Business</p>
+        </div>
+        <div className='text'>
+          <p>
+            Choose from our individual or group packages tailored to fit your
+            preferences. Whether you need striking headshots, vibrant business
+            lifestyle shots, or coverage for corporate events, we've got you
+            covered. Simply request a quote and share a few details about your
+            project. While you await our prompt reply, take a moment to scroll
+            through our gallery.
+          </p>
+          <p>
+            {" "}
+            Upon scheduling your session, you can trust that our team will
+            provide comprehensive support and assistance throughout the entire
+            process. From the initial shoot to the timely delivery of your final
+            images, we are committed to ensuring your complete satisfaction.
+          </p>
         </div>
         <div>
-          <p>
-            Choose you own images in the studio or delegate this task to our
-            photographer with years of experience taking professional headshots
-            in New York Metropolitan Area.
-          </p>
-          <p>
-            Request customed quote{" "}
-            <Link
-              onClick={() =>
-                (window.location = "mailto:email@creativecaptureph.com")
-              }
-            >
-              email@creativecaptureph.com
-            </Link>
-            . Email us few words about your project and deadlines.
-          </p>
+          <button onClick={openModal}>Request a Quote</button>
+          {showModal && (
+            <QuoteForm onClose={closeModal} pagesource='corporate' />
+          )}
         </div>
-      </div>
-      <h2>Company Packages</h2>
-      <div className='corporate_packages'>
-        <div id='package1'>
-          {secondRow.map((product) => (
-            <Package key={product.id} uniqueId={uniqueId} product={product} />
+        <div className='grid' ref={gridRef}>
+          <div className='grid-sizer'></div>
+          {data.map((image) => (
+            <div className='grid-item' key={image.id}>
+              <div className='image-wrapper'>
+                <img
+                  src={`https://ieqxnbaivrturiczktvu.supabase.co/storage/v1/object/public/corporatephotos/${image.name}`}
+                  alt=''
+                  loading='lazy'
+                />
+                <div className='overlay'></div>
+              </div>
+            </div>
           ))}
         </div>
-      </div>
-      <div>
-        <p>
-          We understand that every project is unique. Email us few words about
-          your project and deadlines to get a quote based on your needs.
-        </p>
-        <p>
-          Custom quote:{" "}
-          <Link
-            onClick={() =>
-              (window.location = "mailto:email@info@creativecaptureph.com")
-            }
-          >
-            info@creativecaptureph.com
-          </Link>
-        </p>
       </div>
     </div>
   );

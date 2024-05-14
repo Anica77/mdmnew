@@ -1,13 +1,24 @@
+@font-face {
+  font-family: "Quiche Sans";
+  src: url("../public/fonnts.com-Quiche_Sans_Regular.ttf") format("truetype"); /* Modern Browsers */
+
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Baskervville";
+  src: url("../public/Baskervville-Regular.ttf") format("truetype"); /* Modern Browsers */
+
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Quiche Sans", sans-serif;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: "Quiche Sans", sans-serif;
 }

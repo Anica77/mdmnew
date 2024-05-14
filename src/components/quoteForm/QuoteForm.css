@@ -1,0 +1,79 @@
+/* QuoteForm.css */
+.modal {
+  place-items: center;
+  font-family: "Baskervville", sans-serif;
+}
+
+.modal-content {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 30%;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* display: flex; */
+}
+
+h2 {
+  font-weight: bolder;
+}
+
+.inputs {
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="email"] {
+  margin-left: 10px;
+}
+
+.category-label {
+  text-align: center;
+}
+
+.category-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px; /* Add some space between category buttons and submit button */
+}
+
+.category-buttons button {
+  margin-right: 10px; /* Add some space between category buttons */
+  margin-bottom: 10px;
+}
+
+.submit-button {
+  align-self: center; /* Align the submit button to the center */
+}
+
+button {
+  padding: 5px 20px; /* Adjust padding as needed */
+  font-family: "Quiche Sans", sans-serif;
+  border-radius: 0;
+  background-color: #f0f0f0; /* Light background color */
+  color: #333; /* Text color */
+  border: none;
+  border-bottom: 2px solid black; /* Bottom border */
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:selected {
+  background-color: darkgrey; /* Darker background color when clicked */
+}
+
+button.selected {
+  background-color: #999; /* Darker background color */
+}
