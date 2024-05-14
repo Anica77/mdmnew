@@ -7,24 +7,17 @@ function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    console.log("I am in useEffect");
     let isMounted = true; // Flag to check component mounting status
 
     async function initializeImages() {
       try {
-        console.log("I am in function initializeImages");
         const imagesData = await getBackgroundImages();
-        console.log("IMAGES DATA", imagesData);
         if (isMounted) {
           setImages(imagesData);
-          console.log("IMAGES", imagesData);
           setImageIndex(0);
 
           const intervalId = setInterval(() => {
-            console.log("I am in set interval");
             setImageIndex((prevIndex) => {
-              console.log("I am in set index fn");
-              console.log("images in set image index", imagesData);
               if (imagesData?.length > 0) {
                 const newIndex = (prevIndex + 1) % imagesData?.length;
                 console.log("New index:", newIndex);

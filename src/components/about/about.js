@@ -1,23 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import photo from "./IMG_4285.jpg";
 import "./about.css";
-// import ReviewCarousel from "../reviews/ReviewCarousel";
-// import { getReviews } from "../Supabase";
+import ReviewCarousel from "../reviews/ReviewCarousel";
+import { getReviews } from "../Supabase";
 
 const About = () => {
-  // const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState([]);
 
-  // useEffect(() => {
-  //   async function getAllReviews() {
-  //     const rev = await getReviews();
-  //     if (rev) {
-  //       setReviews(rev);
-  //     }
-  //   }
-  //   getAllReviews();
-  // }, []);
+  useEffect(() => {
+    async function getAllReviews() {
+      const rev = await getReviews();
+      if (rev) {
+        setReviews(rev);
+      }
+    }
+    getAllReviews();
+  }, []);
 
-  // const reviewsFlat = reviews.flat();
+  const reviewsFlat = reviews.flat();
 
   return (
     <div className='contactContainer'>
@@ -42,9 +42,9 @@ const About = () => {
         </div>
         <img src={photo} alt='portrait' className='aboutImage' />
       </div>
-      {/* <div className='reviews'>
+      <div className='reviews'>
         <ReviewCarousel reviews={reviewsFlat} />
-      </div> */}
+      </div>
       <div className='footer'>
         <a
           href={`https://www.instagram.com/mariaduchesne.cc`}
