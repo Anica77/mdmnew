@@ -46,3 +46,7 @@
 img {
   max-width: 100%;
 }
+
+.logoutButton {
+  font-size: 25px;
+}
