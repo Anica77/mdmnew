@@ -1,14 +1,17 @@
 import React, { useEffect, useState, useRef } from "react";
-import supabase from "../Supabase";
+import supabase, { deletePhoto, uploadPhoto } from "../Supabase";
 import Masonry from "masonry-layout";
+import "./portrait.css";
 import QuoteForm from "../quoteForm/QuoteForm";
 import banner from "./33.jpg";
-import "./portrait.css";
 
-const Portraits = () => {
+const Portraits = ({ session }) => {
   const [data, setData] = useState([]);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
   const gridRef = useRef(null);
   const [showModal, setShowModal] = useState(false);
+  const [file, setFile] = useState(null);
+  const [uploadStatus, setUploadStatus] = useState("");
 
   const openModal = () => {
     setShowModal(true);
@@ -19,17 +22,19 @@ const Portraits = () => {
   };
 
   useEffect(() => {
-    const masonry = new Masonry(gridRef.current, {
-      itemSelector: ".grid-item",
-      columnWidth: ".grid-sizer",
-      gutter: 10,
-      // columnWidth: 60,
-      // Adjust the gap between images
-    });
+    if (gridRef.current) {
+      const masonry = new Masonry(gridRef.current, {
+        itemSelector: ".grid-item",
+        columnWidth: ".grid-sizer",
+        gutter: 10,
+      });
 
-    return () => {
-      masonry.destroy();
-    };
+      masonry.layout();
+
+      return () => {
+        masonry.destroy();
+      };
+    }
   }, [data]);
 
   useEffect(() => {
@@ -51,6 +56,47 @@ const Portraits = () => {
 
     getImages();
   }, []);
+
+  const handleDeleteImage = async (imageName) => {
+    const success = await deletePhoto("portraitphotos", imageName);
+    if (success) {
+      setData(data.filter((image) => image.name !== imageName));
+    }
+  };
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const handleUpload = async () => {
+    if (!file) {
+      setUploadStatus("Please select a file to upload.");
+      return;
+    }
+
+    const fileName = `${Date.now()}_${file.name}`;
+    const bucketName = "portraitphotos";
+
+    const result = await uploadPhoto(bucketName, file, fileName);
+
+    if (result) {
+      setUploadStatus("File uploaded successfully!");
+      setData([...data, { id: Date.now(), name: fileName }]);
+    } else {
+      setUploadStatus("Error uploading file.");
+    }
+  };
+
+  const handleImageLoad = () => {
+    // Check if all images have been loaded
+    const allImagesLoaded = data.every((image) => {
+      return document.getElementById(`image-${image.id}`).complete;
+    });
+
+    if (allImagesLoaded) {
+      setImagesLoaded(true);
+    }
+  };
 
   return (
     <div>
@@ -92,15 +138,33 @@ const Portraits = () => {
             <div className='grid-item' key={image.id}>
               <div className='image-wrapper'>
                 <img
+                  id={`image-${image.id}`}
                   src={`https://ieqxnbaivrturiczktvu.supabase.co/storage/v1/object/public/portraitphotos/${image.name}`}
                   alt=''
                   loading='lazy'
+                  onLoad={handleImageLoad} // Call handleImageLoad when image is loaded
                 />
+                {session && (
+                  <button
+                    className='delete-button'
+                    onClick={() => handleDeleteImage(image.name)}
+                  >
+                    X
+                  </button>
+                )}
                 <div className='overlay'></div>
               </div>
             </div>
           ))}
         </div>
+        {session && (
+          <div className='uploadPhoto'>
+            <h2>Upload Image</h2>
+            <input type='file' onChange={handleFileChange} />
+            <button onClick={handleUpload}>Upload</button>
+            {uploadStatus && <p>{uploadStatus}</p>}
+          </div>
+        )}
       </div>
     </div>
   );

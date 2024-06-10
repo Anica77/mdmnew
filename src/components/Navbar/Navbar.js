@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
 
-const Navbar = ({ totalQuantity }) => {
+const Navbar = ({ session, onLogout }) => {
   const location = useLocation();
 
   return (
@@ -41,6 +41,13 @@ const Navbar = ({ totalQuantity }) => {
         >
           Contact
         </Link>
+        {session ? (
+          <button className='logoutButton' onClick={onLogout}>
+            Logout
+          </button>
+        ) : (
+          ""
+        )}
       </div>
     </nav>
   );

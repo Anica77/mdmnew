@@ -1,8 +1,4 @@
-import React from "react";
-// import {
-//   setUniqueSessionStorageItem,
-//   getSessionStorageItem,
-// } from "./sessionStorageUtils";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Corporate from "./components/Corporate/Corporate";
@@ -10,54 +6,79 @@ import Fashion from "./components/fashion/fashion";
 import Portrait from "./components/portrait/portrait";
 import Navbar from "./components/Navbar/Navbar";
 import About from "./components/about/about";
+import AdminLogin from "./components/adminLogin/AdminLogin";
+import supabase from "./components/Supabase";
 import "./App.css";
 
 function App() {
-  // const [uniqueId, setUniqueId] = useState("");
-  // const [cartItems, setCartItems] = useState(0);
-  // const [totalQuantity, setTotalQuantity] = useState(0);
+  const [session, setSession] = useState(null);
 
-  // useEffect(() => {
-  //   setUniqueSessionStorageItem("unique_id");
-  //   const idFromSessionStorage = getSessionStorageItem("unique_id");
-  //   if (idFromSessionStorage) {
-  //     setUniqueId(idFromSessionStorage);
-  //   }
-  // }, []);
+  const handleSessionChange = (newSession) => {
+    setSession(newSession);
+  };
 
-  // useEffect(() => {
-  //   const fetchCartItemsAndUpdateTotalQuantity = async () => {
-  //     try {
-  //       // Fetch the cart items
-  //       const fetchedCartItems = await fetchCartItemsForUser();
-  //       setCartItems(fetchedCartItems); // Update the cartItems state
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error("Error logging out:", error);
+    } else {
+      setSession(null);
+    }
+  };
 
-  //       // Calculate total quantity from fetched cart items
-  //       const newTotalQuantity = fetchedCartItems.reduce(
-  //         (total, item) => total + item.quantity,
-  //         0
-  //       );
-  //       setTotalQuantity(newTotalQuantity); // Update the totalQuantity state
-  //     } catch (error) {
-  //       console.error("Error fetching cart items:", error.message);
-  //     }
-  //   };
+  useEffect(() => {
+    const checkSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      setSession(session);
+      if (session) {
+        handleSessionChange(session);
+        setupAutoRefresh(session);
+      }
+    };
 
-  //   // Call the function to fetch cart items and update totalQuantity
-  //   fetchCartItemsAndUpdateTotalQuantity();
-  // }, []);
+    const setupAutoRefresh = (session) => {
+      const expiresIn = session.expires_in * 1000; // Convert to milliseconds
+      setTimeout(refreshToken, expiresIn - 60000); // Set a timer to refresh the token 1 minute before it expires
+    };
+
+    const refreshToken = async () => {
+      const { error } = await supabase.auth.refreshSession();
+      if (error) {
+        console.error("Error refreshing token:", error);
+      } else {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+        setSession(session);
+        handleSessionChange(session);
+        setupAutoRefresh(session); // Reset the timer
+      }
+    };
+
+    checkSession();
+  }, []);
 
   return (
     <div className='App'>
       <Router>
-        <Navbar />
+        <Navbar session={session} onLogout={handleLogout} />
         <Routes>
-          <Route exact path='/' element={<Home />} />
-          <Route path='/corporate' element={<Corporate />} />
-          <Route exact path='/portraits' element={<Portrait />} />
-          <Route path='/fashion' element={<Fashion />} />
-          <Route path='/events' />
-          <Route path='/about' element={<About />} />
+          <Route exact path='/' element={<Home session={session} />} />
+          <Route
+            exact
+            path='/admin'
+            element={<AdminLogin handleSessionChange={handleSessionChange} />}
+          />
+          <Route path='/corporate' element={<Corporate session={session} />} />
+          <Route
+            exact
+            path='/portraits'
+            element={<Portrait session={session} />}
+          />
+          <Route path='/fashion' element={<Fashion session={session} />} />
+          <Route path='/about' element={<About session={session} />} />
         </Routes>
       </Router>
     </div>
