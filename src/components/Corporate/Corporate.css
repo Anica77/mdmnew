@@ -4,10 +4,12 @@
   flex-direction: column;
   gap: 30px;
   text-align: center;
-}
-.corporate_container p {
   font-size: larger;
 }
+/* 
+.corporate_container p {
+  font-size: larger;
+} */
 
 .banner {
   background-size: cover;
@@ -15,41 +17,44 @@
   height: 300px;
   position: relative;
 }
+
 .banner-text {
   position: absolute;
   font-family: Baskervville, sans-serif;
-  top: 50%; /* Align text vertically in the middle */
-  left: 50%; /* Align text horizontally in the middle */
-  transform: translate(-50%, -50%); /* Center text */
-  color: rgb(237, 233, 233); /* Light gray color */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(237, 233, 233);
   font-size: 80px !important;
-  font-weight: bolder; /* Bold font weight */
-  text-align: center; /* Center-align text */
+  font-weight: bolder;
+  text-align: center;
   padding-bottom: 10%;
 }
 
 .text {
   margin: 5%;
 }
+
 .grid {
-  display: grid;
-  grid-template-columns: repeat(
-    3,
-    minmax(400px, 1fr)
-  ); /* Adjust the minimum width as needed */
-  place-items: center;
-  margin-left: 15%;
-  margin-right: 11%;
-  /* justify-content: center; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* Adjust the gap between grid items */
+  margin: 0 5%; /* Reduce the margins on the sides */
+}
+
+.grid-item {
+  flex: 1 1 calc(33% - 20px); /* Ensures three columns with gap */
+  max-width: calc(33% - 20px);
+  box-sizing: border-box;
+  margin-bottom: 10px; /* Ensure consistent gap under each item */
+  width: 100%;
 }
 
 .grid-item img {
-  width: 430px; /* Allow images to maintain their aspect ratio */
-  max-width: 430px; /* Ensure images don't exceed their container's width */
+  width: 100%;
   height: auto; /* Allow images to maintain their aspect ratio */
-  max-height: 630px; /* Set a maximum height for images */
   display: block;
-  margin-bottom: 7px;
 }
 
 button {
@@ -62,12 +67,13 @@ button {
   display: block;
 }
 
-.grid-item {
+.image-wrapper {
   position: relative;
 }
 
-.image-wrapper {
-  position: relative;
+.grid.images-loaded {
+  margin-left: 10%;
+  margin-right: 5%;
 }
 
 .overlay {
@@ -77,7 +83,7 @@ button {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0); /* Adjust transparency as needed */
-  pointer-events: none; /* Allow clicks to pass through the overlay */
+  pointer-events: none;
 }
 
 .delete-button {
@@ -104,4 +110,25 @@ button {
   max-width: fit-content;
   margin-left: auto;
   margin-right: auto;
+}
+.reviews {
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 768px) {
+  .grid-item {
+    flex: 1 1 calc(50% - 20px); /* Two columns on smaller screens */
+    max-width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-item {
+    flex: 1 1 100%; /* One column on extra small screens */
+    max-width: 100%;
+  }
 }

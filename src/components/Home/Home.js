@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getBackgroundImages } from "../Supabase";
+import "./Home.css";
 
 function Home() {
   const [images, setImages] = useState(null); // Initialize with null
@@ -26,7 +27,7 @@ function Home() {
                 return prevIndex;
               }
             });
-          }, 7000);
+          }, 7000); // Interval time for image change (7 seconds)
 
           return () => clearInterval(intervalId);
         }
@@ -84,7 +85,7 @@ function Home() {
   }, [imageIndex, images, isLoading]);
 
   return (
-    <>
+    <div className='page-container'>
       {isLoading ? <div>Loading...</div> : null}
       <div
         id='background-container'
@@ -97,7 +98,23 @@ function Home() {
           zIndex: -1,
         }}
       ></div>
-    </>
+      <h1>Welcome to Creative Capture</h1>
+      <div className='additional-links'>
+        <a href='/corporate'>Corporate</a>
+        <a href='/fashion'>Fashion&Beauty</a>
+        <a href='/portraits'>Portraits</a>
+      </div>
+      <div className='spacer'></div>
+      <div className='footer-homepage'>
+        <a
+          href={`https://www.instagram.com/mariaduchesne.cc`}
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          Instagram
+        </a>
+      </div>
+    </div>
   );
 }
 

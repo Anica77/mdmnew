@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Corporate from "./components/Corporate/Corporate";
@@ -12,6 +12,8 @@ import "./App.css";
 
 function App() {
   const [session, setSession] = useState(null);
+  const inactivityTimeout = useRef(null);
+  const inactivityTimeLimit = 30 * 60 * 1000; // 30 minutes in milliseconds
 
   const handleSessionChange = (newSession) => {
     setSession(newSession);
@@ -26,6 +28,25 @@ function App() {
     }
   };
 
+  const resetInactivityTimeout = () => {
+    if (inactivityTimeout.current) {
+      clearTimeout(inactivityTimeout.current);
+    }
+    inactivityTimeout.current = setTimeout(() => {
+      handleLogout();
+    }, inactivityTimeLimit);
+  };
+
+  const setupActivityListeners = () => {
+    window.addEventListener("mousemove", resetInactivityTimeout);
+    window.addEventListener("keypress", resetInactivityTimeout);
+  };
+
+  const removeActivityListeners = () => {
+    window.removeEventListener("mousemove", resetInactivityTimeout);
+    window.removeEventListener("keypress", resetInactivityTimeout);
+  };
+
   useEffect(() => {
     const checkSession = async () => {
       const {
@@ -35,6 +56,10 @@ function App() {
       if (session) {
         handleSessionChange(session);
         setupAutoRefresh(session);
+        resetInactivityTimeout();
+        setupActivityListeners();
+      } else {
+        removeActivityListeners();
       }
     };
 
@@ -58,6 +83,13 @@ function App() {
     };
 
     checkSession();
+
+    return () => {
+      if (inactivityTimeout.current) {
+        clearTimeout(inactivityTimeout.current);
+      }
+      removeActivityListeners();
+    };
   }, []);
 
   return (
