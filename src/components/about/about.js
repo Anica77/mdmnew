@@ -39,6 +39,9 @@ const About = () => {
             colors, techniques, and light, which can be seen throughout my
             portfolio.
           </p>
+          <a href='mailto:mduchesne@creativecaptureph.com'>
+            mduchesne@creativecaptureph.com
+          </a>
         </div>
         <img src={photo} alt='portrait' className='aboutImage' />
       </div>

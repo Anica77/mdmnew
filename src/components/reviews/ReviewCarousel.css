@@ -11,6 +11,7 @@
 
 .reviewText {
   text-align: center;
+  font-size: 20px;
   flex-grow: 1; /* Take up remaining space */
 }
 

@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
-import supabase, { deletePhoto, uploadPhoto } from "../Supabase";
+import supabase, { deletePhoto, uploadPhoto, getReviews } from "../Supabase";
 import Masonry from "masonry-layout";
 import "./Corporate.css";
 import QuoteForm from "../quoteForm/QuoteForm";
 import banner from "./IMG_5757.jpg";
+import ReviewCarousel from "../reviews/ReviewCarousel";
 
 const Corporate = ({ session }) => {
   const [data, setData] = useState([]);
@@ -12,6 +13,19 @@ const Corporate = ({ session }) => {
   const [showModal, setShowModal] = useState(false);
   const [file, setFile] = useState(null);
   const [uploadStatus, setUploadStatus] = useState("");
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    async function getAllReviews() {
+      const rev = await getReviews();
+      if (rev) {
+        setReviews(rev);
+      }
+    }
+    getAllReviews();
+  }, []);
+
+  const reviewsFlat = reviews.flat();
 
   const openModal = () => {
     setShowModal(true);
@@ -35,7 +49,7 @@ const Corporate = ({ session }) => {
         masonry.destroy();
       };
     }
-  }, [data]);
+  }, [imagesLoaded, data]);
 
   useEffect(() => {
     const getImages = async () => {
@@ -119,6 +133,9 @@ const Corporate = ({ session }) => {
             process. From the initial shoot to the timely delivery of your final
             images, we are committed to ensuring your complete satisfaction.
           </p>
+        </div>
+        <div className='reviews'>
+          <ReviewCarousel reviews={reviewsFlat} />
         </div>
         <div>
           <button onClick={openModal}>Request a Quote</button>

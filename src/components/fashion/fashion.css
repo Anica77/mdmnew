@@ -7,24 +7,15 @@
 }
 
 .fashion_container {
+  font-family: Baskervville, sans-serif;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-}
-.fashion_packages {
-  display: flex;
-  justify-content: space-around;
+  gap: 30px;
+  text-align: center;
+  font-size: larger;
 }
 
-ul {
-  text-align: left;
-}
-
-li {
-  margin: 5px;
-}
-
-.innerbox_package {
-  padding: 20px;
-  /* border: 1px solid black; */
+.grid {
+  margin-left: 10%;
+  margin-right: 5%;
 }

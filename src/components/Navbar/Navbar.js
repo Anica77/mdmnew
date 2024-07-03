@@ -13,41 +13,54 @@ const Navbar = ({ session, onLogout }) => {
         </Link>
       </div>
       <div className='right-links'>
-        <Link
-          className={`link ${
-            location.pathname === "/corporate" ? "active" : ""
-          }`}
-          to='/corporate'
-        >
-          Business
-        </Link>
-        <Link
-          className={`link ${location.pathname === "/fashion" ? "active" : ""}`}
-          to='/fashion'
-        >
-          Fashion and Beauty
-        </Link>
-        <Link
-          className={`link ${
-            location.pathname === "/portraits" ? "active" : ""
-          }`}
-          to='/portraits'
-        >
-          Portraits
-        </Link>
-        <Link
-          className={`link ${location.pathname === "/about" ? "active" : ""}`}
-          to='/about'
-        >
-          Contact
-        </Link>
+        {location.pathname === "/" ? (
+          <Link
+            className={`link ${location.pathname === "/about" ? "active" : ""}`}
+            to='/about'
+          >
+            Contact
+          </Link>
+        ) : (
+          <>
+            <Link
+              className={`link ${
+                location.pathname === "/corporate" ? "active" : ""
+              }`}
+              to='/corporate'
+            >
+              Business
+            </Link>
+            <Link
+              className={`link ${
+                location.pathname === "/fashion" ? "active" : ""
+              }`}
+              to='/fashion'
+            >
+              Fashion and Beauty
+            </Link>
+            <Link
+              className={`link ${
+                location.pathname === "/portraits" ? "active" : ""
+              }`}
+              to='/portraits'
+            >
+              Portraits
+            </Link>
+            <Link
+              className={`link ${
+                location.pathname === "/about" ? "active" : ""
+              }`}
+              to='/about'
+            >
+              Contact
+            </Link>
+          </>
+        )}
         {session ? (
           <button className='logoutButton' onClick={onLogout}>
             Logout
           </button>
-        ) : (
-          ""
-        )}
+        ) : null}
       </div>
     </nav>
   );

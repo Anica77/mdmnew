@@ -35,7 +35,7 @@ const Portraits = ({ session }) => {
         masonry.destroy();
       };
     }
-  }, [data]);
+  }, [imagesLoaded, data]);
 
   useEffect(() => {
     const getImages = async () => {
