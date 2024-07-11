@@ -2,24 +2,14 @@ import React, { useEffect, useState, useRef } from "react";
 import supabase, { deletePhoto, uploadPhoto } from "../Supabase";
 import Masonry from "masonry-layout";
 import "./fashion.css";
-import QuoteForm from "../quoteForm/QuoteForm";
 import banner from "./IMG_9075.jpg";
 
 const Fashion = ({ session }) => {
   const [data, setData] = useState([]);
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const gridRef = useRef(null);
-  const [showModal, setShowModal] = useState(false);
   const [file, setFile] = useState(null);
   const [uploadStatus, setUploadStatus] = useState("");
-
-  const openModal = () => {
-    setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-  };
 
   useEffect(() => {
     if (gridRef.current) {
@@ -127,12 +117,22 @@ const Fashion = ({ session }) => {
             images, we are committed to ensuring your complete satisfaction.
           </p>
         </div>
-        <div>
+        <div className='requestF'>
+          <p>
+            Every project is unique. Email us to describe your project or
+            request a phone call, and we will create a quote specifically for
+            you.
+          </p>
+          <a href='mailto:info@creativecaptureph.com'>
+            info@creativecaptureph.com
+          </a>
+        </div>
+        {/* <div>
           <button onClick={openModal}>Request a Quote</button>
           {showModal && (
             <QuoteForm onClose={closeModal} pagesource='Fashion&Beauty' />
           )}
-        </div>
+        </div> */}
         <div className='grid' ref={gridRef}>
           <div className='grid-sizer'></div>
           {data.map((image) => (
