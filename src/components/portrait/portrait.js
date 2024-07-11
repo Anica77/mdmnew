@@ -127,7 +127,9 @@ const Portraits = ({ session }) => {
           </p>
         </div>
         <div>
-          <button onClick={openModal}>Request a Quote</button>
+          <button className='request' onClick={openModal}>
+            Request a Quote
+          </button>
           {showModal && (
             <QuoteForm onClose={closeModal} pagesource='Fashion&Beauty' />
           )}

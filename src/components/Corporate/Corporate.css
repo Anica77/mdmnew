@@ -1,5 +1,5 @@
 .corporate_container {
-  font-family: Baskervville, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -33,6 +33,7 @@
 
 .text {
   margin: 5%;
+  text-align: justify;
 }
 
 .grid {
@@ -65,6 +66,10 @@ button {
   width: fit-content;
   margin: 0 auto;
   display: block;
+}
+
+.request {
+  font-size: 30px;
 }
 
 .image-wrapper {
