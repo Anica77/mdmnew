@@ -7,6 +7,7 @@ function QuoteForm({ onClose, pagesource }) {
     email: "",
     category: pagesource,
   });
+  const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,8 +16,6 @@ function QuoteForm({ onClose, pagesource }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("pagesource", pagesource);
-    console.log("form data", formData);
     try {
       const response = await fetch("/send-email", {
         method: "POST",
@@ -34,14 +33,18 @@ function QuoteForm({ onClose, pagesource }) {
 
       if (response.ok) {
         console.log("Email sent successfully");
-        onClose(); // Close the modal or perform other actions as needed
+        setMessage("Request sent! We will email you back shortly."); // Set the message
+        setTimeout(() => {
+          setMessage(""); // Clear the message after 2 seconds
+          onClose(); // Close the modal or perform other actions as needed
+        }, 2000);
       } else {
         console.error("Failed to send email");
-        // Handle error
+        setMessage("Failed to send request. Please try again."); // Optional error message
       }
     } catch (error) {
       console.error("Error sending email:", error);
-      // Handle error
+      setMessage("Error sending request. Please try again."); // Optional error message
     }
   };
 
@@ -52,7 +55,7 @@ function QuoteForm({ onClose, pagesource }) {
           &times;
         </span>
         <h2>Request a Quote</h2>
-        <form onSubmit={handleSubmit} pagesource='corporate'>
+        <form onSubmit={handleSubmit}>
           <div className='inputs'>
             <label>
               Name:
@@ -77,6 +80,8 @@ function QuoteForm({ onClose, pagesource }) {
             Request
           </button>
         </form>
+        {message && <p className='confirmation-message'>{message}</p>}{" "}
+        {/* Show message */}
       </div>
     </div>
   );

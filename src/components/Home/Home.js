@@ -39,7 +39,6 @@ function Home() {
             setImageIndex((prevIndex) => {
               if (imagesData?.length > 0) {
                 const newIndex = (prevIndex + 1) % imagesData.length;
-                console.log("New index:", newIndex);
                 return newIndex;
               } else {
                 return prevIndex;
@@ -101,7 +100,6 @@ function Home() {
 
   return (
     <div className='page-container'>
-      {/* {isLoading ? <div>Loading...</div> : null} */}
       <div
         id='background-container'
         style={{

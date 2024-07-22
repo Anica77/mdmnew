@@ -42,6 +42,4 @@ async function deleteRowsOneMinuteAgo() {
   }
 }
 
-// Schedule periodic execution
-// For 30 min just add 30 * 60 * 1000
 setInterval(deleteRowsOneMinuteAgo, 30 * 60 * 1000);

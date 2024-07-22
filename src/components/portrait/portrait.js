@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
-import supabase, { deletePhoto, uploadPhoto } from "../Supabase";
 import Masonry from "masonry-layout";
-import "./portrait.css";
+import imagesLoaded from "imagesloaded";
+import supabase, { deletePhoto, uploadPhoto } from "../Supabase";
 import QuoteForm from "../quoteForm/QuoteForm";
 import banner from "./33.jpg";
+import "./portrait.css";
 
 const Portraits = ({ session }) => {
   const [data, setData] = useState([]);
-  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [imagesLoadedState, setImagesLoadedState] = useState(false);
   const gridRef = useRef(null);
   const [showModal, setShowModal] = useState(false);
   const [file, setFile] = useState(null);
@@ -20,22 +21,6 @@ const Portraits = ({ session }) => {
   const closeModal = () => {
     setShowModal(false);
   };
-
-  useEffect(() => {
-    if (gridRef.current) {
-      const masonry = new Masonry(gridRef.current, {
-        itemSelector: ".grid-item",
-        columnWidth: ".grid-sizer",
-        gutter: 10,
-      });
-
-      masonry.layout();
-
-      return () => {
-        masonry.destroy();
-      };
-    }
-  }, [imagesLoaded, data]);
 
   useEffect(() => {
     const getImages = async () => {
@@ -56,6 +41,30 @@ const Portraits = ({ session }) => {
 
     getImages();
   }, []);
+
+  useEffect(() => {
+    if (gridRef.current) {
+      const masonry = new Masonry(gridRef.current, {
+        itemSelector: ".grid-item",
+        columnWidth: ".grid-sizer",
+        gutter: 10,
+      });
+
+      const imgLoad = imagesLoaded(gridRef.current);
+
+      imgLoad.on("progress", () => {
+        masonry.layout();
+      });
+
+      imgLoad.on("done", () => {
+        setImagesLoadedState(true);
+      });
+
+      return () => {
+        masonry.destroy();
+      };
+    }
+  }, [data]);
 
   const handleDeleteImage = async (imageName) => {
     const success = await deletePhoto("portraitphotos", imageName);
@@ -87,17 +96,6 @@ const Portraits = ({ session }) => {
     }
   };
 
-  const handleImageLoad = () => {
-    // Check if all images have been loaded
-    const allImagesLoaded = data.every((image) => {
-      return document.getElementById(`image-${image.id}`).complete;
-    });
-
-    if (allImagesLoaded) {
-      setImagesLoaded(true);
-    }
-  };
-
   return (
     <div>
       <div className='portraits_container'>
@@ -111,19 +109,14 @@ const Portraits = ({ session }) => {
         </div>
         <div className='text'>
           <p>
-            Choose from our individual or group packages tailored to fit your
-            preferences. Whether you need striking headshots, vibrant business
-            lifestyle shots, or coverage for corporate events, we've got you
-            covered. Simply request a quote and share a few details about your
-            project. While you await our prompt reply, take a moment to scroll
-            through our gallery.
-          </p>
-          <p>
-            {" "}
-            Upon scheduling your session, you can trust that our team will
-            provide comprehensive support and assistance throughout the entire
-            process. From the initial shoot to the timely delivery of your final
-            images, we are committed to ensuring your complete satisfaction.
+            Whether it’s an acting headshot, personal portrait, personal brand
+            image, or family photographs, we will help you tell your story
+            creatively. CreativeCapture team will work closely with you to
+            capture the essence of your personality and the unique message you
+            want to convey. From professional lighting and composition to
+            post-production editing, we ensure every detail is perfect. Let us
+            transform your vision into stunning visuals that stand out and make
+            a lasting impression.
           </p>
         </div>
         <div>
@@ -131,7 +124,7 @@ const Portraits = ({ session }) => {
             Request a Quote
           </button>
           {showModal && (
-            <QuoteForm onClose={closeModal} pagesource='Fashion&Beauty' />
+            <QuoteForm onClose={closeModal} pagesource='Portraits' />
           )}
         </div>
         <div className='grid' ref={gridRef}>
@@ -144,7 +137,6 @@ const Portraits = ({ session }) => {
                   src={`https://ieqxnbaivrturiczktvu.supabase.co/storage/v1/object/public/portraitphotos/${image.name}`}
                   alt=''
                   loading='lazy'
-                  onLoad={handleImageLoad} // Call handleImageLoad when image is loaded
                 />
                 {session && (
                   <button

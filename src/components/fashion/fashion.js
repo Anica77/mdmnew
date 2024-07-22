@@ -100,39 +100,21 @@ const Fashion = ({ session }) => {
           <p className='banner-text'>Fashion & Beauty</p>
         </div>
         <div className='text'>
-          {console.log("session from fashion", session)}
           <p>
-            Choose from our individual or group packages tailored to fit your
-            preferences. Whether you need striking headshots, vibrant business
-            lifestyle shots, or coverage for corporate events, we've got you
-            covered. Simply request a quote and share a few details about your
-            project. While you await our prompt reply, take a moment to scroll
-            through our gallery.
+            Capturing brand essence with elegance and clarity. Product
+            photography, lifestyle, hero shots, look books, editorial.
           </p>
-          <p>
-            {" "}
-            Upon scheduling your session, you can trust that our team will
-            provide comprehensive support and assistance throughout the entire
-            process. From the initial shoot to the timely delivery of your final
-            images, we are committed to ensuring your complete satisfaction.
-          </p>
+          <div className='requestF'>
+            <p>
+              We understand that each project is unique. Email us describing
+              your project or request a phone call and we will be able to create
+              a quote specifically for your project.
+            </p>
+            <a href='mailto:info@creativecaptureph.com'>
+              info@creativecaptureph.com
+            </a>
+          </div>
         </div>
-        <div className='requestF'>
-          <p>
-            Every project is unique. Email us to describe your project or
-            request a phone call, and we will create a quote specifically for
-            you.
-          </p>
-          <a href='mailto:info@creativecaptureph.com'>
-            info@creativecaptureph.com
-          </a>
-        </div>
-        {/* <div>
-          <button onClick={openModal}>Request a Quote</button>
-          {showModal && (
-            <QuoteForm onClose={closeModal} pagesource='Fashion&Beauty' />
-          )}
-        </div> */}
         <div className='grid' ref={gridRef}>
           <div className='grid-sizer'></div>
           {data.map((image) => (

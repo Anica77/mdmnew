@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
+require("dotenv").config();
 
 const app = express();
 const PORT = 3001;
@@ -12,13 +13,9 @@ app.use(bodyParser.json());
 const getPdfPath = (category) => {
   switch (category) {
     case "corporate":
-      return "./public/corporate.pdf";
-    case "Fashion&Beauty":
-      return "./public/fashion_beauty.pdf";
+      return "./public/BusinessCC.pdf";
     case "Portraits":
-      return "./public/portraits.pdf";
-    case "Events":
-      return "./public/events.pdf";
+      return "./public/PortraitCC.pdf";
     default:
       return null; // Return null for unknown categories
   }
@@ -26,8 +23,6 @@ const getPdfPath = (category) => {
 app.post("/send-email", async (req, res) => {
   // Extract email details from the request body
   const { senderEmail, name, category } = req.body;
-  console.log("Ovo je kategorija", category);
-  console.log("ovo je req.body", req.body);
 
   if (!category) {
     return res.status(400).send("Category is required");
@@ -36,12 +31,16 @@ app.post("/send-email", async (req, res) => {
   try {
     // Configure Nodemailer with your email service provider's SMTP settings
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
+      host: "smtp.ionos.com",
       port: 587,
       secure: false, // true for 465, false for other ports
       auth: {
-        user: "anaotero.webdev@gmail.com",
-        pass: "drnd hjpp uzuf daqi",
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+      tls: {
+        // This ensures TLS is used
+        rejectUnauthorized: false,
       },
     });
 
@@ -53,7 +52,7 @@ app.post("/send-email", async (req, res) => {
 
     // Define email content
     const mailOptions = {
-      from: "anaotero.webdev@gmail.com",
+      from: "info@creativecaptureph.com",
       to: senderEmail,
       subject: "Automated Response with PDF Attachment",
       html: `
@@ -77,9 +76,6 @@ app.post("/send-email", async (req, res) => {
 
     // Send the email
     await transporter.sendMail(mailOptions);
-
-    // Delete the PDF file after sending the email
-    // fs.unlinkSync(pdfPath);
 
     console.log("Email sent with PDF attachment");
     res.status(200).send("Email sent with PDF attachment");
