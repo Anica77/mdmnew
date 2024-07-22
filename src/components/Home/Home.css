@@ -1,22 +1,23 @@
 .page-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Distribute items evenly along the flex container */
-  align-items: center; /* Center items horizontally */
+  justify-content: space-between;
+  align-items: center;
   height: 90vh;
+  font-family: Baskerville;
 }
 
 h1 {
-  margin-top: 30px; /* Adjust as needed */
+  margin-top: 30px;
   color: rgb(129, 126, 126);
-  opacity: 0; /* Initial state: fully transparent */
-  animation: fadeIn 3s ease-in forwards; /* Apply the animation */
+  opacity: 0;
+  animation: fadeIn 3s ease-in forwards;
   font-size: 45px;
 }
 
 @keyframes fadeIn {
   to {
-    opacity: 1; /* Final state: fully opaque */
+    opacity: 1;
   }
 }
 

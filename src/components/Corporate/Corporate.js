@@ -89,7 +89,7 @@ const Corporate = ({ session }) => {
     }
 
     const fileName = `${Date.now()}_${file.name}`;
-    const bucketName = "corporatephotos"; // Change this to your bucket name
+    const bucketName = "corporatephotos";
 
     const result = await uploadPhoto(bucketName, file, fileName);
 
@@ -158,7 +158,7 @@ const Corporate = ({ session }) => {
                   src={`https://ieqxnbaivrturiczktvu.supabase.co/storage/v1/object/public/corporatephotos/${image.name}`}
                   alt=''
                   loading='lazy'
-                  onLoad={handleImageLoad} // Call handleImageLoad when image is loaded
+                  onLoad={handleImageLoad}
                 />
                 {session && (
                   <button

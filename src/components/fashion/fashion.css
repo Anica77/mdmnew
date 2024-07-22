@@ -21,9 +21,13 @@
 }
 
 .requestF {
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .requestF a {
   text-decoration: underline;
+}
+
+.text {
+  text-align: center;
 }

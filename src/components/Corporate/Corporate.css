@@ -6,10 +6,6 @@
   text-align: center;
   font-size: larger;
 }
-/* 
-.corporate_container p {
-  font-size: larger;
-} */
 
 .banner {
   background-size: cover;
@@ -40,21 +36,21 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px; /* Adjust the gap between grid items */
-  margin: 0 5%; /* Reduce the margins on the sides */
+  gap: 20px;
+  margin: 0 5%;
 }
 
 .grid-item {
-  flex: 1 1 calc(33% - 20px); /* Ensures three columns with gap */
+  flex: 1 1 calc(33% - 20px);
   max-width: calc(33% - 20px);
   box-sizing: border-box;
-  margin-bottom: 10px; /* Ensure consistent gap under each item */
+  margin-bottom: 10px;
   width: 100%;
 }
 
 .grid-item img {
   width: 100%;
-  height: auto; /* Allow images to maintain their aspect ratio */
+  height: auto;
   display: block;
 }
 
@@ -87,7 +83,7 @@ button {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0); /* Adjust transparency as needed */
+  background-color: rgba(0, 0, 0, 0);
   pointer-events: none;
 }
 
@@ -126,14 +122,14 @@ button {
 
 @media (max-width: 768px) {
   .grid-item {
-    flex: 1 1 calc(50% - 20px); /* Two columns on smaller screens */
+    flex: 1 1 calc(50% - 20px);
     max-width: calc(50% - 20px);
   }
 }
 
 @media (max-width: 480px) {
   .grid-item {
-    flex: 1 1 100%; /* One column on extra small screens */
+    flex: 1 1 100%;
     max-width: 100%;
   }
 }

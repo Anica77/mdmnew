@@ -13,7 +13,7 @@ import "./App.css";
 function App() {
   const [session, setSession] = useState(null);
   const inactivityTimeout = useRef(null);
-  const inactivityTimeLimit = 30 * 60 * 1000; // 30 minutes in milliseconds
+  const inactivityTimeLimit = 30 * 60 * 1000;
 
   const handleSessionChange = (newSession) => {
     setSession(newSession);
@@ -64,8 +64,8 @@ function App() {
     };
 
     const setupAutoRefresh = (session) => {
-      const expiresIn = session.expires_in * 1000; // Convert to milliseconds
-      setTimeout(refreshToken, expiresIn - 60000); // Set a timer to refresh the token 1 minute before it expires
+      const expiresIn = session.expires_in * 1000;
+      setTimeout(refreshToken, expiresIn - 60000);
     };
 
     const refreshToken = async () => {
