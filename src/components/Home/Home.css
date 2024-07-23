@@ -5,6 +5,8 @@
   align-items: center;
   height: 90vh;
   font-family: Baskerville;
+  position: relative; /* Ensure the container takes full space */
+  overflow: hidden; /* Prevent overflow if necessary */
 }
 
 h1 {
@@ -23,6 +25,8 @@ h1 {
 
 .additional-links {
   font-size: 50px;
+  display: flex; /* Ensure flexbox is applied */
+  flex-direction: row; /* Default to horizontal layout */
 }
 
 .additional-links a {
@@ -53,14 +57,41 @@ h1 {
   font-size: 20px;
 }
 
+#background-container {
+  position: fixed; /* Ensure it covers the entire viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Place behind content */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat;
+  background-size: cover; /* Cover the entire container */
+  opacity: 1; /* Ensure it's visible */
+}
+
+/* Media Query for Mobile Devices */
 @media (max-width: 768px) {
-  .footer {
-    flex-direction: column;
-    height: auto;
-    padding: 10px 0;
+  .page-container {
+    height: 100vh; /* Adjust height to fit mobile screen */
   }
+
   .additional-links {
-    display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Stack links vertically on mobile */
+    font-size: 40px; /* Adjust font size for smaller screens */
+    align-items: center; /* Center links horizontally */
+  }
+
+  .additional-links a {
+    font-size: 50px; /* Adjust link size for smaller screens */
+    margin: 10px 0; /* Adjust margin for vertical spacing */
+  }
+
+  .footer-homepage {
+    height: auto; /* Adjust footer height for mobile */
+  }
+
+  .footer-homepage a {
+    font-size: 18px; /* Adjust font size for mobile */
   }
 }

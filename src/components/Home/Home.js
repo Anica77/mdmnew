@@ -14,31 +14,50 @@ function Home() {
     async function initializeImages() {
       try {
         const imagesData = await getBackgroundImages();
-        if (isMounted) {
-          setImages(imagesData);
 
-          if (imagesData?.length > 0) {
-            const firstImage = new Image();
-            firstImage.src = `https://ieqxnbaivrturiczktvu.supabase.co/storage/v1/object/public/homepagebackground/${imagesData[0]?.name}`;
-            firstImage.onload = () => {
-              if (isMounted) {
-                setIsLoading(false);
-                setImageIndex(0);
-                setIsFirstImageLoaded(true);
-                const backgroundContainer = document.getElementById(
-                  "background-container"
-                );
+        // Filter out any placeholder or non-image items
+        const validImages = imagesData.filter(
+          (image) => !image.name.includes(".emptyFolderPlaceholder")
+        );
+
+        if (isMounted && validImages.length > 0) {
+          setImages(validImages);
+
+          const firstImageName = validImages[0]?.name;
+
+          if (!firstImageName) {
+            console.warn("First image name is not available.");
+            return;
+          }
+
+          const firstImageUrl = `https://ieqxnbaivrturiczktvu.supabase.co/storage/v1/object/public/homepagebackground/${firstImageName}`;
+
+          const firstImage = new Image();
+          firstImage.src = firstImageUrl;
+          firstImage.onload = () => {
+            if (isMounted) {
+              setIsLoading(false);
+              setImageIndex(0);
+              setIsFirstImageLoaded(true);
+              const backgroundContainer = document.getElementById(
+                "background-container"
+              );
+              if (backgroundContainer) {
                 backgroundContainer.style.backgroundImage = `url(${firstImage.src})`;
                 backgroundContainer.style.backgroundSize = "cover";
                 backgroundContainer.style.opacity = 1; // Ensure it's fully visible
               }
-            };
-          }
+            }
+          };
+
+          firstImage.onerror = () => {
+            console.error("Failed to load image:", firstImage.src);
+          };
 
           const intervalId = setInterval(() => {
             setImageIndex((prevIndex) => {
-              if (imagesData?.length > 0) {
-                const newIndex = (prevIndex + 1) % imagesData.length;
+              if (validImages.length > 0) {
+                const newIndex = (prevIndex + 1) % validImages.length;
                 return newIndex;
               } else {
                 return prevIndex;
@@ -47,6 +66,8 @@ function Home() {
           }, 7000);
 
           return () => clearInterval(intervalId);
+        } else {
+          console.warn("No valid images found.");
         }
       } catch (error) {
         console.error("Error initializing images:", error);
@@ -73,6 +94,9 @@ function Home() {
       image.onload = () => {
         setIsLoading(false);
       };
+      image.onerror = () => {
+        console.error("Failed to load image:", image.src);
+      };
     }
   }, [imageIndex, images]);
 
@@ -83,18 +107,22 @@ function Home() {
         "background-container"
       );
 
-      backgroundContainer.style.transition = "opacity 1s ease-out";
-      backgroundContainer.style.opacity = 0;
+      if (backgroundContainer) {
+        backgroundContainer.style.transition = "opacity 1s ease-out";
+        backgroundContainer.style.opacity = 0;
 
-      setTimeout(() => {
-        backgroundContainer.style.backgroundImage = `url(https://ieqxnbaivrturiczktvu.supabase.co/storage/v1/object/public/homepagebackground/${currentImageUrl})`;
-        backgroundContainer.style.backgroundSize = "cover";
+        setTimeout(() => {
+          backgroundContainer.style.backgroundImage = `url(https://ieqxnbaivrturiczktvu.supabase.co/storage/v1/object/public/homepagebackground/${currentImageUrl})`;
+          backgroundContainer.style.backgroundSize = "cover";
 
-        requestAnimationFrame(() => {
-          backgroundContainer.style.transition = "opacity 1s ease-in";
-          backgroundContainer.style.opacity = 1;
-        });
-      }, 1000);
+          requestAnimationFrame(() => {
+            backgroundContainer.style.transition = "opacity 1s ease-in";
+            backgroundContainer.style.opacity = 1;
+          });
+        }, 1000);
+      } else {
+        console.warn("Background container not found.");
+      }
     }
   }, [imageIndex, images, isLoading, isFirstImageLoaded]);
 
