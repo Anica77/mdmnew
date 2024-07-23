@@ -3,7 +3,7 @@ import Masonry from "masonry-layout";
 import imagesLoaded from "imagesloaded";
 import supabase, { deletePhoto, uploadPhoto } from "../Supabase";
 import QuoteForm from "../quoteForm/QuoteForm";
-import banner from "./33.jpg";
+import banner from "./33OPT.jpg";
 import "./portrait.css";
 
 const Portraits = ({ session }) => {

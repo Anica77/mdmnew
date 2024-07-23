@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import photo from "./IMG_4285.jpg";
+import photo from "./IMG_4285OPT.jpg";
 import "./about.css";
 import ReviewCarousel from "../reviews/ReviewCarousel";
 import { getReviews } from "../Supabase";

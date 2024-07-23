@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import supabase, { deletePhoto, uploadPhoto } from "../Supabase";
 import Masonry from "masonry-layout";
 import "./fashion.css";
-import banner from "./IMG_9075.jpg";
+import banner from "./IMG_9075OPT.jpg";
 
 const Fashion = ({ session }) => {
   const [data, setData] = useState([]);
