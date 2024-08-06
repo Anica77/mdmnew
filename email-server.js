@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 // Enable CORS for your deployed domain
 app.use(
   cors({
-    origin: "https://yourfrontenddomain.com", // Replace with your frontend domain
+    origin: "https:/creativecaptureph.com", // Replace with your frontend domain
     methods: ["POST"], // Allow only POST method
     allowedHeaders: ["Content-Type"],
   })

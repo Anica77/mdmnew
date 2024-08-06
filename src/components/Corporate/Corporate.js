@@ -163,7 +163,7 @@ const Corporate = ({ session }) => {
                 <img
                   id={`image-${image.id}`}
                   src={`https://ieqxnbaivrturiczktvu.supabase.co/storage/v1/object/public/corporatephotos/${image.name}`}
-                  srcset='images/image-320w.jpg 320w,
+                  srcSet='images/image-320w.jpg 320w,
                           images/image-480w.jpg 480w,
                           images/image-800w.jpg 800w'
                   sizes='(max-width: 320px) 280px,
