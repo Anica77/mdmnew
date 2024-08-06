@@ -12,6 +12,7 @@
   background-position: center;
   height: 300px;
   position: relative;
+  overflow: hidden;
 }
 
 .banner-text {
@@ -120,10 +121,22 @@ button {
   margin-right: auto;
 }
 
+.grid-item img {
+  display: none;
+}
+
+.grid-item img.loaded {
+  display: block;
+}
+
 @media (max-width: 768px) {
   .grid-item {
     flex: 1 1 calc(50% - 20px);
     max-width: calc(50% - 20px);
+  }
+  .banner-text {
+    font-size: 60px; /* Reduce font size for tablets */
+    padding-bottom: 5%; /* Adjust padding */
   }
 }
 
@@ -131,5 +144,18 @@ button {
   .grid-item {
     flex: 1 1 100%;
     max-width: 100%;
+  }
+  .banner-text {
+    font-size: 40px; /* Reduce font size for phones */
+    padding-bottom: 3%; /* Further adjust padding */
+    width: 80%; /* Ensure text fits well */
+  }
+}
+
+@media (max-width: 320px) {
+  .banner-text {
+    font-size: 30px; /* Further reduce font size for very small screens */
+    padding-bottom: 2%; /* Minimal padding */
+    width: 90%; /* More width allowance */
   }
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import supabase, { deletePhoto, uploadPhoto, getReviews } from "../Supabase";
 import Masonry from "masonry-layout";
+import imagesLoaded from "imagesloaded";
 import "./Corporate.css";
 import QuoteForm from "../quoteForm/QuoteForm";
 import banner from "./IMG_5757OPT.jpg";
@@ -8,7 +9,7 @@ import ReviewCarousel from "../reviews/ReviewCarousel";
 
 const Corporate = ({ session }) => {
   const [data, setData] = useState([]);
-  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [imagesLoadedState, setImagesLoadedState] = useState(false);
   const gridRef = useRef(null);
   const [showModal, setShowModal] = useState(false);
   const [file, setFile] = useState(null);
@@ -36,20 +37,26 @@ const Corporate = ({ session }) => {
   };
 
   useEffect(() => {
+    const handleImagesLoaded = () => {
+      if (gridRef.current) {
+        const masonry = new Masonry(gridRef.current, {
+          itemSelector: ".grid-item",
+          columnWidth: ".grid-sizer",
+          gutter: 10,
+        });
+
+        masonry.layout();
+
+        return () => {
+          masonry.destroy();
+        };
+      }
+    };
+
     if (gridRef.current) {
-      const masonry = new Masonry(gridRef.current, {
-        itemSelector: ".grid-item",
-        columnWidth: ".grid-sizer",
-        gutter: 10,
-      });
-
-      masonry.layout();
-
-      return () => {
-        masonry.destroy();
-      };
+      imagesLoaded(gridRef.current, handleImagesLoaded);
     }
-  }, [imagesLoaded, data]);
+  }, [data]);
 
   useEffect(() => {
     const getImages = async () => {
@@ -101,14 +108,14 @@ const Corporate = ({ session }) => {
     }
   };
 
-  const handleImageLoad = () => {
-    // Check if all images have been loaded
-    const allImagesLoaded = data.every((image) => {
-      return document.getElementById(`image-${image.id}`).complete;
-    });
+  const handleImageLoad = (event) => {
+    event.target.classList.add("loaded");
+    const allImagesLoaded = Array.from(
+      gridRef.current.querySelectorAll("img")
+    ).every((img) => img.classList.contains("loaded"));
 
     if (allImagesLoaded) {
-      setImagesLoaded(true);
+      setImagesLoadedState(true);
     }
   };
 
@@ -146,7 +153,7 @@ const Corporate = ({ session }) => {
           )}
         </div>
         <div
-          className={`grid ${imagesLoaded ? "images-loaded" : ""}`}
+          className={`grid ${imagesLoadedState ? "images-loaded" : ""}`}
           ref={gridRef}
         >
           <div className='grid-sizer'></div>
@@ -156,6 +163,12 @@ const Corporate = ({ session }) => {
                 <img
                   id={`image-${image.id}`}
                   src={`https://ieqxnbaivrturiczktvu.supabase.co/storage/v1/object/public/corporatephotos/${image.name}`}
+                  srcset='images/image-320w.jpg 320w,
+                          images/image-480w.jpg 480w,
+                          images/image-800w.jpg 800w'
+                  sizes='(max-width: 320px) 280px,
+                          (max-width: 480px) 440px,
+                           800px'
                   alt=''
                   loading='lazy'
                   onLoad={handleImageLoad}

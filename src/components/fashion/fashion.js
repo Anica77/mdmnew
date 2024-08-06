@@ -1,31 +1,38 @@
 import React, { useEffect, useState, useRef } from "react";
 import supabase, { deletePhoto, uploadPhoto } from "../Supabase";
 import Masonry from "masonry-layout";
+import imagesLoaded from "imagesloaded";
 import "./fashion.css";
 import banner from "./IMG_9075OPT.jpg";
 
 const Fashion = ({ session }) => {
   const [data, setData] = useState([]);
-  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [imagesLoadedState, setImagesLoadedState] = useState(false);
   const gridRef = useRef(null);
   const [file, setFile] = useState(null);
   const [uploadStatus, setUploadStatus] = useState("");
 
   useEffect(() => {
+    const handleImagesLoaded = () => {
+      if (gridRef.current) {
+        const masonry = new Masonry(gridRef.current, {
+          itemSelector: ".grid-item",
+          columnWidth: ".grid-sizer",
+          gutter: 10,
+        });
+
+        masonry.layout();
+
+        return () => {
+          masonry.destroy();
+        };
+      }
+    };
+
     if (gridRef.current) {
-      const masonry = new Masonry(gridRef.current, {
-        itemSelector: ".grid-item",
-        columnWidth: ".grid-sizer",
-        gutter: 10,
-      });
-
-      masonry.layout();
-
-      return () => {
-        masonry.destroy();
-      };
+      imagesLoaded(gridRef.current, handleImagesLoaded);
     }
-  }, [imagesLoaded, data]);
+  }, [data]);
 
   useEffect(() => {
     const getImages = async () => {
@@ -77,14 +84,14 @@ const Fashion = ({ session }) => {
     }
   };
 
-  const handleImageLoad = () => {
-    // Check if all images have been loaded
-    const allImagesLoaded = data.every((image) => {
-      return document.getElementById(`image-${image.id}`).complete;
-    });
+  const handleImageLoad = (event) => {
+    event.target.classList.add("loaded");
+    const allImagesLoaded = Array.from(
+      gridRef.current.querySelectorAll("img")
+    ).every((img) => img.classList.contains("loaded"));
 
     if (allImagesLoaded) {
-      setImagesLoaded(true);
+      setImagesLoadedState(true);
     }
   };
 

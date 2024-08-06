@@ -10,3 +10,28 @@
   font-family: Arial, Helvetica, sans-serif;
   font-size: 19px;
 }
+.grid {
+  position: relative;
+}
+
+.grid-item {
+  width: 100%; /* Adjust as needed */
+  margin-bottom: 10px; /* Adjust as needed */
+}
+
+.image-wrapper {
+  position: relative;
+}
+
+.image-wrapper img {
+  width: 100%;
+  display: block;
+}
+
+.grid-item img {
+  display: none;
+}
+
+.grid-item img.loaded {
+  display: block;
+}

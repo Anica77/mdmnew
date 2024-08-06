@@ -31,3 +31,28 @@
 .text {
   text-align: center;
 }
+
+.grid-item img {
+  display: none;
+}
+
+.grid-item img.loaded {
+  display: block;
+}
+@media (max-width: 768px) {
+  .banner-text {
+    padding-bottom: 50px; /* Adjust padding for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-text {
+    padding-bottom: 40px; /* Further adjust padding for phones */
+  }
+}
+
+@media (max-width: 320px) {
+  .banner-text {
+    padding-bottom: 30px; /* Smaller margin for very small screens */
+  }
+}
