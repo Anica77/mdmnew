@@ -121,13 +121,13 @@ button {
   margin-right: auto;
 }
 
-/* .grid-item img {
+.grid-item img {
   display: none;
 }
 
 .grid-item img.loaded {
   display: block;
-} */
+}
 
 @media (max-width: 768px) {
   .grid-item {
