@@ -54,6 +54,13 @@ app.post("/send-email", async (req, res) => {
         rejectUnauthorized: false,
       },
     });
+    transporter.verify(function (error, success) {
+      if (error) {
+        console.log("SMTP Connection Error:", error);
+      } else {
+        console.log("SMTP Server is ready to take our messages");
+      }
+    });
 
     const pdfPath = getPdfPath(category);
 
