@@ -8,6 +8,8 @@ import Navbar from "./components/Navbar/Navbar";
 import About from "./components/about/about";
 import AdminLogin from "./components/adminLogin/AdminLogin";
 import supabase from "./components/Supabase";
+import ScrollToTop from "./components/scroll/ScrollToTop";
+import ScrollToTopButton from "./components/scroll/ScrollToTopButton";
 import "./App.css";
 
 function App() {
@@ -95,23 +97,29 @@ function App() {
   return (
     <div className='App'>
       <Router>
-        <Navbar session={session} onLogout={handleLogout} />
-        <Routes>
-          <Route exact path='/' element={<Home session={session} />} />
-          <Route
-            exact
-            path='/admin'
-            element={<AdminLogin handleSessionChange={handleSessionChange} />}
-          />
-          <Route path='/corporate' element={<Corporate session={session} />} />
-          <Route
-            exact
-            path='/portraits'
-            element={<Portrait session={session} />}
-          />
-          <Route path='/fashion' element={<Fashion session={session} />} />
-          <Route path='/about' element={<About session={session} />} />
-        </Routes>
+        <ScrollToTop>
+          <Navbar session={session} onLogout={handleLogout} />
+          <Routes>
+            <Route exact path='/' element={<Home session={session} />} />
+            <Route
+              exact
+              path='/admin'
+              element={<AdminLogin handleSessionChange={handleSessionChange} />}
+            />
+            <Route
+              path='/corporate'
+              element={<Corporate session={session} />}
+            />
+            <Route
+              exact
+              path='/portraits'
+              element={<Portrait session={session} />}
+            />
+            <Route path='/fashion' element={<Fashion session={session} />} />
+            <Route path='/about' element={<About session={session} />} />
+          </Routes>
+          <ScrollToTopButton />
+        </ScrollToTop>
       </Router>
     </div>
   );

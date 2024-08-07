@@ -80,3 +80,70 @@ button:selected {
 button.selected {
   background-color: #999;
 }
+
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 15px;
+    width: 95%; /* Use almost full width for small screens */
+  }
+
+  h2 {
+    font-size: 1.25rem; /* Smaller font size for mobile */
+  }
+
+  label {
+    font-size: 0.9rem;
+  }
+
+  input[type="text"],
+  input[type="email"] {
+    font-size: 0.9rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 8px 15px; /* Adjust padding for smaller buttons */
+  }
+
+  .close {
+    font-size: 20px;
+    top: 5px;
+    right: 5px;
+  }
+}
+
+/* Tablets and Larger Screens */
+@media (min-width: 600px) {
+  .modal-content {
+    width: 70%; /* Adjust width for tablets */
+  }
+
+  input[type="text"],
+  input[type="email"] {
+    font-size: 1.1rem;
+  }
+
+  button {
+    font-size: 1.1rem;
+  }
+}
+
+/* Desktops and Larger Screens */
+@media (min-width: 992px) {
+  .modal-content {
+    width: 40%; /* Adjust width for desktops */
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  input[type="text"],
+  input[type="email"] {
+    font-size: 1.2rem;
+  }
+
+  button {
+    font-size: 1.2rem;
+  }
+}

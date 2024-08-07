@@ -11,7 +11,10 @@ const Navbar = ({ session, onLogout }) => {
         <Link to='/' className='logo-link'>
           <img src='CClogotrans.png' alt='logo' className='logo-image'></img>
         </Link>
-        <div className='logo-text'>Creative Capture</div>
+        <div className='logo-text'>
+          <p>Creative Capture</p>
+          <p>New York</p>
+        </div>
       </div>
       <div className='right-links'>
         {location.pathname === "/" ? (
