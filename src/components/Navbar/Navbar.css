@@ -13,7 +13,7 @@
 
 .logo-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   margin-right: auto;
 }
@@ -30,10 +30,17 @@
 }
 
 .logo-text {
-  font-size: 14px;
+  font-size: 17px;
   color: black;
-  text-align: center;
+  /* text-align: center; */
+  justify-content: space-around;
   margin-bottom: 4px;
+  gap: 1px;
+}
+
+.logo-text p {
+  margin: 0; /* Remove default margin */
+  line-height: 1.2; /* Optional: adjust line height */
 }
 
 .right-links {

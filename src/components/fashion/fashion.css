@@ -47,6 +47,7 @@
 
 @media (max-width: 480px) {
   .banner-text {
+    font-size: 50px !important;
     padding-bottom: 40px; /* Further adjust padding for phones */
   }
 }
