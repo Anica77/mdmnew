@@ -27,11 +27,3 @@
   width: 100%;
   display: block;
 }
-
-.grid-item img {
-  display: none;
-}
-
-.grid-item img.loaded {
-  display: block;
-}
