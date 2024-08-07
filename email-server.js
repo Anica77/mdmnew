@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(
   cors({
     origin: "https:/creativecaptureph.com", // Replace with your frontend domain
-    methods: ["POST"], // Allow only POST method
+    methods: ["GET", "POST"], // Allow only POST method
     allowedHeaders: ["Content-Type"],
   })
 );
