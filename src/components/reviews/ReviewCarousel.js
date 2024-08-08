@@ -24,9 +24,9 @@ function ReviewsCarousel({ reviews }) {
         <div>
           <h2>Reviews</h2>
           <div className='reviewContainer'>
-            <button onClick={prevReview}>&#8249;</button>
+            <button className='prev' onClick={prevReview}></button>
             <p className='reviewText'>{reviews[currentReviewIndex].text}</p>
-            <button onClick={nextReview}>&#8250;</button>
+            <button className='next' onClick={nextReview}></button>
           </div>
         </div>
       )}

@@ -1,3 +1,4 @@
+/* Existing CSS */
 .nav-links {
   display: flex;
   justify-content: space-between;
@@ -32,10 +33,9 @@
 .logo-text {
   font-size: 17px;
   color: black;
-  /* text-align: center; */
   justify-content: space-around;
-  margin-bottom: 4px;
   gap: 1px;
+  padding-top: 7px;
 }
 
 .logo-text p {
@@ -66,6 +66,45 @@
   padding: 10px 15px;
 }
 
+/* New CSS for dropdown */
+.dropdown-toggle {
+  display: none; /* Hide by default */
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: larger;
+  padding: 10px 15px;
+}
+
+.links-container {
+  display: flex; /* Display links by default */
+  flex-direction: row;
+}
+
+.links-container.open {
+  display: none; /* Hide links when dropdown is open */
+}
+
+.dropdown-menu {
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: white;
+  position: absolute;
+  top: 90px;
+  left: 0;
+  width: 100%;
+  border-top: 1px solid black;
+}
+
+.dropdown-menu.open {
+  display: flex;
+}
+
+.dropdown-menu .link {
+  padding: 10px 20px;
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
   .nav-links {
@@ -82,9 +121,8 @@
 
   .right-links {
     order: 1;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
   }
 
@@ -93,5 +131,18 @@
     padding: 10px;
     flex: 1 0 auto;
     text-align: center;
+  }
+
+  .dropdown-toggle {
+    display: block; /* Show on mobile devices */
+  }
+
+  .links-container {
+    display: none; /* Hide links by default on mobile */
+  }
+
+  .links-container.open {
+    display: flex; /* Show links when dropdown is open on mobile */
+    flex-direction: column; /* Stack links vertically */
   }
 }
