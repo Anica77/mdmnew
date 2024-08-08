@@ -3,9 +3,8 @@ import { getBackgroundImages } from "../Supabase";
 import "./Home.css";
 
 function Home() {
-  const [images, setImages] = useState(null);
+  const [images, setImages] = useState([]);
   const [imageIndex, setImageIndex] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
   const [isFirstImageLoaded, setIsFirstImageLoaded] = useState(false);
 
   useEffect(() => {
@@ -36,8 +35,6 @@ function Home() {
           firstImage.src = firstImageUrl;
           firstImage.onload = () => {
             if (isMounted) {
-              setIsLoading(false);
-              setImageIndex(0);
               setIsFirstImageLoaded(true);
               const backgroundContainer = document.getElementById(
                 "background-container"
@@ -47,25 +44,22 @@ function Home() {
                 backgroundContainer.style.backgroundSize = "cover";
                 backgroundContainer.style.opacity = 1; // Ensure it's fully visible
               }
+
+              // Start the interval for changing images after the first image has loaded
+              const intervalId = setInterval(() => {
+                setImageIndex((prevIndex) => {
+                  const newIndex = (prevIndex + 1) % validImages.length;
+                  return newIndex;
+                });
+              }, 7000);
+
+              return () => clearInterval(intervalId);
             }
           };
 
           firstImage.onerror = () => {
             console.error("Failed to load image:", firstImage.src);
           };
-
-          const intervalId = setInterval(() => {
-            setImageIndex((prevIndex) => {
-              if (validImages.length > 0) {
-                const newIndex = (prevIndex + 1) % validImages.length;
-                return newIndex;
-              } else {
-                return prevIndex;
-              }
-            });
-          }, 7000);
-
-          return () => clearInterval(intervalId);
         } else {
           console.warn("No valid images found.");
         }
@@ -77,54 +71,35 @@ function Home() {
     initializeImages();
     return () => {
       isMounted = false;
-      document.body.style.backgroundImage = "";
-      document.body.style.backgroundSize = "";
-      document.body.style.backgroundPosition = "";
-      document.body.style.backgroundRepeat = "";
-      document.body.style.margin = "";
-      document.body.style.height = "";
     };
   }, []);
 
   useEffect(() => {
-    if (images?.length > 0 && imageIndex > 0) {
+    if (images.length > 0 && imageIndex > 0) {
       const currentImageUrl = images[imageIndex]?.name;
       const image = new Image();
       image.src = `https://ieqxnbaivrturiczktvu.supabase.co/storage/v1/object/public/homepagebackground/${currentImageUrl}`;
       image.onload = () => {
-        setIsLoading(false);
+        const backgroundContainer = document.getElementById(
+          "background-container"
+        );
+        if (backgroundContainer) {
+          backgroundContainer.style.transition = "opacity 1s ease-out";
+          backgroundContainer.style.opacity = 0;
+
+          setTimeout(() => {
+            backgroundContainer.style.backgroundImage = `url(${image.src})`;
+            backgroundContainer.style.backgroundSize = "cover";
+            backgroundContainer.style.transition = "opacity 1s ease-in";
+            backgroundContainer.style.opacity = 1;
+          }, 1000);
+        }
       };
       image.onerror = () => {
         console.error("Failed to load image:", image.src);
       };
     }
   }, [imageIndex, images]);
-
-  useEffect(() => {
-    if (!isLoading && isFirstImageLoaded) {
-      const currentImageUrl = images[imageIndex]?.name;
-      const backgroundContainer = document.getElementById(
-        "background-container"
-      );
-
-      if (backgroundContainer) {
-        backgroundContainer.style.transition = "opacity 1s ease-out";
-        backgroundContainer.style.opacity = 0;
-
-        setTimeout(() => {
-          backgroundContainer.style.backgroundImage = `url(https://ieqxnbaivrturiczktvu.supabase.co/storage/v1/object/public/homepagebackground/${currentImageUrl})`;
-          backgroundContainer.style.backgroundSize = "cover";
-
-          requestAnimationFrame(() => {
-            backgroundContainer.style.transition = "opacity 1s ease-in";
-            backgroundContainer.style.opacity = 1;
-          });
-        }, 1000);
-      } else {
-        console.warn("Background container not found.");
-      }
-    }
-  }, [imageIndex, images, isLoading, isFirstImageLoaded]);
 
   return (
     <div className='page-container'>
@@ -138,6 +113,7 @@ function Home() {
           height: "100%",
           zIndex: -1,
           opacity: isFirstImageLoaded ? 1 : 0, // Ensure it's fully visible if the first image is loaded
+          transition: "opacity 1s ease-in",
         }}
       ></div>
       <h1>Welcome to Creative Capture</h1>

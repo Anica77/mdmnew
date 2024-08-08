@@ -34,6 +34,25 @@ const Fashion = ({ session }) => {
     }
   }, [data]);
 
+  // useEffect(() => {
+  //   const getImages = async () => {
+  //     try {
+  //       const { data, error } = await supabase.storage
+  //         .from("fashionphotos")
+  //         .list();
+
+  //       if (error) {
+  //         throw error;
+  //       }
+
+  //       setData(data);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error.message);
+  //     }
+  //   };
+
+  //   getImages();
+  // }, []);
   useEffect(() => {
     const getImages = async () => {
       try {
@@ -45,7 +64,12 @@ const Fashion = ({ session }) => {
           throw error;
         }
 
-        setData(data);
+        // Filter out empty or placeholder files
+        const validImages = data.filter(
+          (image) => image.name !== ".emptyFolderPlaceholder"
+        );
+
+        setData(validImages);
       } catch (error) {
         console.error("Error fetching data:", error.message);
       }
