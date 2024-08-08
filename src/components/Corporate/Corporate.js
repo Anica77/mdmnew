@@ -111,11 +111,14 @@ const Corporate = ({ session }) => {
 
   const handleImageLoad = (event) => {
     event.target.classList.add("loaded");
+    console.log(`Image loaded: ${event.target.src}`);
+
     const allImagesLoaded = Array.from(
       gridRef.current.querySelectorAll("img")
     ).every((img) => img.classList.contains("loaded"));
 
     if (allImagesLoaded) {
+      console.log("All images loaded");
       setImagesLoadedState(true);
     }
   };
