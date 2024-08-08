@@ -10,11 +10,13 @@ const Navbar = ({ session, onLogout }) => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  const isHomepage = location.pathname === "/";
+
   return (
     <nav className='nav-links'>
       <div className='logo-container'>
         <Link to='/' className='logo-link'>
-          <img src='CClogotrans.png' alt='logo' className='logo-image'></img>
+          <img src='CClogotrans.png' alt='logo' className='logo-image' />
         </Link>
         <div className='logo-text'>
           <p>Creative Capture</p>
@@ -22,45 +24,56 @@ const Navbar = ({ session, onLogout }) => {
         </div>
       </div>
       <div className='right-links'>
-        <button className='dropdown-toggle' onClick={toggleDropdown}>
-          ☰ Categories
-        </button>
-        <div className={`links-container ${isDropdownOpen ? "open" : ""}`}>
-          <Link
-            className={`link ${
-              location.pathname === "/corporate" ? "active" : ""
-            }`}
-            to='/corporate'
-            onClick={() => setIsDropdownOpen(false)}
-          >
-            Business
-          </Link>
-          <Link
-            className={`link ${
-              location.pathname === "/fashion" ? "active" : ""
-            }`}
-            to='/fashion'
-            onClick={() => setIsDropdownOpen(false)}
-          >
-            Fashion and Beauty
-          </Link>
-          <Link
-            className={`link ${
-              location.pathname === "/portraits" ? "active" : ""
-            }`}
-            to='/portraits'
-            onClick={() => setIsDropdownOpen(false)}
-          >
-            Portraits
-          </Link>
-          <Link
-            className={`link ${location.pathname === "/about" ? "active" : ""}`}
-            to='/about'
-            onClick={() => setIsDropdownOpen(false)}
-          >
+        {/* Conditionally render the contact link or dropdown based on path and screen size */}
+        {isHomepage ? (
+          <Link className='link' to='/about'>
             Contact
           </Link>
-        </div>
+        ) : (
+          <>
+            <button className='dropdown-toggle' onClick={toggleDropdown}>
+              ☰ Categories
+            </button>
+            <div className={`links-container ${isDropdownOpen ? "open" : ""}`}>
+              <Link
+                className={`link ${
+                  location.pathname === "/corporate" ? "active" : ""
+                }`}
+                to='/corporate'
+                onClick={() => setIsDropdownOpen(false)}
+              >
+                Business
+              </Link>
+              <Link
+                className={`link ${
+                  location.pathname === "/fashion" ? "active" : ""
+                }`}
+                to='/fashion'
+                onClick={() => setIsDropdownOpen(false)}
+              >
+                Fashion and Beauty
+              </Link>
+              <Link
+                className={`link ${
+                  location.pathname === "/portraits" ? "active" : ""
+                }`}
+                to='/portraits'
+                onClick={() => setIsDropdownOpen(false)}
+              >
+                Portraits
+              </Link>
+              <Link
+                className={`link ${
+                  location.pathname === "/about" ? "active" : ""
+                }`}
+                to='/about'
+                onClick={() => setIsDropdownOpen(false)}
+              >
+                Contact
+              </Link>
+            </div>
+          </>
+        )}
         {session ? (
           <button className='logoutButton' onClick={onLogout}>
             Logout

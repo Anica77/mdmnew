@@ -145,4 +145,13 @@
     display: flex; /* Show links when dropdown is open on mobile */
     flex-direction: column; /* Stack links vertically */
   }
+
+  /* Ensure "Contact" is visible on homepage in mobile view */
+  .nav-links.home .right-links {
+    display: flex;
+  }
+
+  .nav-links.home .dropdown-toggle {
+    display: none;
+  }
 }
