@@ -59,6 +59,25 @@ const Corporate = ({ session }) => {
     }
   }, [data]);
 
+  // useEffect(() => {
+  //   const getImages = async () => {
+  //     try {
+  //       const { data, error } = await supabase.storage
+  //         .from("corporatephotos")
+  //         .list();
+
+  //       if (error) {
+  //         throw error;
+  //       }
+
+  //       setData(data);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error.message);
+  //     }
+  //   };
+
+  //   getImages();
+  // }, []);
   useEffect(() => {
     const getImages = async () => {
       try {
@@ -70,7 +89,12 @@ const Corporate = ({ session }) => {
           throw error;
         }
 
-        setData(data);
+        // Filter out empty or placeholder files
+        const validImages = data.filter(
+          (image) => image.name !== ".emptyFolderPlaceholder"
+        );
+
+        setData(validImages);
       } catch (error) {
         console.error("Error fetching data:", error.message);
       }
@@ -109,9 +133,28 @@ const Corporate = ({ session }) => {
     }
   };
 
+  // const handleImageLoad = (event) => {
+  //   event.target.classList.add("loaded");
+  //   console.log(`Image loaded: ${event.target.src}`);
+
+  //   const allImagesLoaded = Array.from(
+  //     gridRef.current.querySelectorAll("img")
+  //   ).every((img) => img.classList.contains("loaded"));
+
+  //   if (allImagesLoaded) {
+  //     console.log("All images loaded");
+  //     setImagesLoadedState(true);
+  //   }
+  // };
+
   const handleImageLoad = (event) => {
-    event.target.classList.add("loaded");
-    console.log(`Image loaded: ${event.target.src}`);
+    if (event.target.complete && event.target.naturalHeight !== 0) {
+      event.target.classList.add("loaded");
+      console.log(`Image loaded: ${event.target.src}`);
+    } else {
+      console.error(`Image failed to load: ${event.target.src}`);
+      event.target.src = "fallback-image-url"; // Provide a fallback image URL
+    }
 
     const allImagesLoaded = Array.from(
       gridRef.current.querySelectorAll("img")
