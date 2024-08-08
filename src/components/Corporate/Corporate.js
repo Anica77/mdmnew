@@ -165,7 +165,7 @@ const Corporate = ({ session }) => {
                   id={`image-${image.id}`}
                   src={`https://ieqxnbaivrturiczktvu.supabase.co/storage/v1/object/public/corporatephotos/${image.name}`}
                   alt=''
-                  loading='lazy'
+                  // loading='lazy'
                   onLoad={handleImageLoad}
                 />
                 {session && (
