@@ -11,15 +11,40 @@
 
 h1 {
   margin-top: 30px;
-  color: rgb(129, 126, 126);
+  color: white;
+  text-shadow: -1.5px -1.5px 0 black;
   opacity: 0;
-  animation: fadeIn 3s ease-in forwards;
-  font-size: 45px;
+  animation: fadeInOut 6s ease-in-out forwards;
+  font-size: 55px;
 }
 
 @keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 
@@ -27,6 +52,7 @@ h1 {
   font-size: 50px;
   display: flex; /* Ensure flexbox is applied */
   flex-direction: row; /* Default to horizontal layout */
+  padding-top: 15px;
 }
 
 .additional-links a {
@@ -54,8 +80,9 @@ h1 {
 .footer-homepage a {
   margin: 5px 0;
   text-decoration: none;
-  color: rgb(129, 126, 126);
-  font-size: 20px;
+  color: white;
+  text-shadow: -1.5px -1.5px 0 black;
+  font-size: 25px;
 }
 
 #background-container {

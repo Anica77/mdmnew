@@ -37,7 +37,7 @@ function QuoteForm({ onClose, pagesource }) {
         setTimeout(() => {
           setMessage(""); // Clear the message after 2 seconds
           onClose(); // Close the modal or perform other actions as needed
-        }, 2000);
+        }, 4000);
       } else {
         console.error("Failed to send email");
         setMessage("Failed to send request. Please try again."); // Optional error message
