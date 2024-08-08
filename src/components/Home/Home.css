@@ -32,7 +32,8 @@ h1 {
 .additional-links a {
   text-decoration: none;
   font-weight: bold;
-  color: rgb(129, 126, 126);
+  color: white;
+  text-shadow: -1.5px -1.5px 0 black;
   transition: font-size 0.2s ease-in-out;
   margin: 15px;
 }

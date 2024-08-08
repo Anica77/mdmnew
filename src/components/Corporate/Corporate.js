@@ -43,6 +43,7 @@ const Corporate = ({ session }) => {
           itemSelector: ".grid-item",
           columnWidth: ".grid-sizer",
           gutter: 10,
+          percentPosition: true,
         });
 
         masonry.layout();
@@ -54,7 +55,7 @@ const Corporate = ({ session }) => {
     };
 
     if (gridRef.current) {
-      imagesLoaded(gridRef.current, handleImagesLoaded);
+      imagesLoaded(gridRef.current, { background: true }, handleImagesLoaded);
     }
   }, [data]);
 
