@@ -17,19 +17,22 @@ function QuoteForm({ onClose, pagesource }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          senderEmail: formData.email,
-          subject: "Inquiry from website",
-          category: formData.category,
-          message: `${formData.name} has submitted an inquiry.\n\nEmail: ${formData.email}\nCategory: ${formData.category}`,
-          name: formData.name,
-        }),
-      });
+      const response = await fetch(
+        "https://email-server-misty-grass-5845.fly.dev/send-email",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            senderEmail: formData.email,
+            subject: "Inquiry from website",
+            category: formData.category,
+            message: `${formData.name} has submitted an inquiry.\n\nEmail: ${formData.email}\nCategory: ${formData.category}`,
+            name: formData.name,
+          }),
+        }
+      );
 
       if (response.ok) {
         console.log("Email sent successfully");
