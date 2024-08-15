@@ -57,7 +57,7 @@ const About = () => {
           Instagram
         </a>
         <a
-          href={`https://www.linkedin.com/in/maria-romashko-duchesne-1162ab100`}
+          href={`https://www.linkedin.com/in/creative-capture-7479a2321?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app`}
           target='_blank'
           rel='noopener noreferrer'
         >
