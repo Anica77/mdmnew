@@ -3,7 +3,6 @@ import supabase, { deletePhoto, uploadPhoto, getReviews } from "../Supabase";
 import Masonry from "masonry-layout";
 import imagesLoaded from "imagesloaded";
 import "./Corporate.css";
-import QuoteForm from "../quoteForm/QuoteForm";
 import banner from "./IMG_5757OPT.jpg";
 import ReviewCarousel from "../reviews/ReviewCarousel";
 
@@ -11,7 +10,6 @@ const Corporate = ({ session }) => {
   const [data, setData] = useState([]);
   const [imagesLoadedState, setImagesLoadedState] = useState(false);
   const gridRef = useRef(null);
-  const [showModal, setShowModal] = useState(false);
   const [file, setFile] = useState(null);
   const [uploadStatus, setUploadStatus] = useState("");
   const [reviews, setReviews] = useState([]);
@@ -27,14 +25,6 @@ const Corporate = ({ session }) => {
   }, []);
 
   const reviewsFlat = reviews.flat();
-
-  const openModal = () => {
-    setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-  };
 
   useEffect(() => {
     const handleImagesLoaded = () => {
@@ -59,25 +49,6 @@ const Corporate = ({ session }) => {
     }
   }, [data]);
 
-  // useEffect(() => {
-  //   const getImages = async () => {
-  //     try {
-  //       const { data, error } = await supabase.storage
-  //         .from("corporatephotos")
-  //         .list();
-
-  //       if (error) {
-  //         throw error;
-  //       }
-
-  //       setData(data);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error.message);
-  //     }
-  //   };
-
-  //   getImages();
-  // }, []);
   useEffect(() => {
     const getImages = async () => {
       try {
@@ -127,33 +98,18 @@ const Corporate = ({ session }) => {
 
     if (result) {
       setUploadStatus("File uploaded successfully!");
-      setData([...data, { id: Date.now(), name: fileName }]); // Update with new image
+      setData([...data, { id: Date.now(), name: fileName }]);
     } else {
       setUploadStatus("Error uploading file.");
     }
   };
 
-  // const handleImageLoad = (event) => {
-  //   event.target.classList.add("loaded");
-  //   console.log(`Image loaded: ${event.target.src}`);
-
-  //   const allImagesLoaded = Array.from(
-  //     gridRef.current.querySelectorAll("img")
-  //   ).every((img) => img.classList.contains("loaded"));
-
-  //   if (allImagesLoaded) {
-  //     console.log("All images loaded");
-  //     setImagesLoadedState(true);
-  //   }
-  // };
-
   const handleImageLoad = (event) => {
     if (event.target.complete && event.target.naturalHeight !== 0) {
       event.target.classList.add("loaded");
-      console.log(`Image loaded: ${event.target.src}`);
     } else {
       console.error(`Image failed to load: ${event.target.src}`);
-      event.target.src = "fallback-image-url"; // Provide a fallback image URL
+      event.target.src = "fallback-image-url";
     }
 
     const allImagesLoaded = Array.from(
@@ -191,14 +147,9 @@ const Corporate = ({ session }) => {
         <div className='reviews'>
           <ReviewCarousel reviews={reviewsFlat} />
         </div>
-        <div>
-          <button className='request' onClick={openModal}>
-            Request a Quote
-          </button>
-          {showModal && (
-            <QuoteForm onClose={closeModal} pagesource='corporate' />
-          )}
-        </div>
+        <a className='request' href='mailto:info@creativecaptureph.com'>
+          Request a Quote
+        </a>
         <div
           className={`grid ${imagesLoadedState ? "images-loaded" : ""}`}
           ref={gridRef}
@@ -211,7 +162,6 @@ const Corporate = ({ session }) => {
                   id={`image-${image.id}`}
                   src={`https://ieqxnbaivrturiczktvu.supabase.co/storage/v1/object/public/corporatephotos/${image.name}`}
                   alt=''
-                  // loading='lazy'
                   onLoad={handleImageLoad}
                 />
                 {session && (

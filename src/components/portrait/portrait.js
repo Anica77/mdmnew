@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import Masonry from "masonry-layout";
 import imagesLoaded from "imagesloaded";
 import supabase, { deletePhoto, uploadPhoto } from "../Supabase";
-import QuoteForm from "../quoteForm/QuoteForm";
 import banner from "./33OPT.jpg";
 import "./portrait.css";
 
@@ -10,37 +9,9 @@ const Portraits = ({ session }) => {
   const [data, setData] = useState([]);
   const [imagesLoadedState, setImagesLoadedState] = useState(false);
   const gridRef = useRef(null);
-  const [showModal, setShowModal] = useState(false);
   const [file, setFile] = useState(null);
   const [uploadStatus, setUploadStatus] = useState("");
 
-  const openModal = () => {
-    setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-  };
-
-  // useEffect(() => {
-  //   const getImages = async () => {
-  //     try {
-  //       const { data, error } = await supabase.storage
-  //         .from("portraitphotos")
-  //         .list();
-
-  //       if (error) {
-  //         throw error;
-  //       }
-
-  //       setData(data);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error.message);
-  //     }
-  //   };
-
-  //   getImages();
-  // }, []);
   useEffect(() => {
     const getImages = async () => {
       try {
@@ -143,13 +114,8 @@ const Portraits = ({ session }) => {
             a lasting impression.
           </p>
         </div>
-        <div>
-          <button className='request' onClick={openModal}>
-            Request a Quote
-          </button>
-          {showModal && (
-            <QuoteForm onClose={closeModal} pagesource='Portraits' />
-          )}
+        <div className='request'>
+          <a href='mailto:info@creativecaptureph.com'>Request a Quote</a>
         </div>
         <div className='grid' ref={gridRef}>
           <div className='grid-sizer'></div>

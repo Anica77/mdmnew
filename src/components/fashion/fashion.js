@@ -34,25 +34,6 @@ const Fashion = ({ session }) => {
     }
   }, [data]);
 
-  // useEffect(() => {
-  //   const getImages = async () => {
-  //     try {
-  //       const { data, error } = await supabase.storage
-  //         .from("fashionphotos")
-  //         .list();
-
-  //       if (error) {
-  //         throw error;
-  //       }
-
-  //       setData(data);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error.message);
-  //     }
-  //   };
-
-  //   getImages();
-  // }, []);
   useEffect(() => {
     const getImages = async () => {
       try {
@@ -156,7 +137,7 @@ const Fashion = ({ session }) => {
                   src={`https://ieqxnbaivrturiczktvu.supabase.co/storage/v1/object/public/fashionphotos/${image.name}`}
                   alt=''
                   loading='lazy'
-                  onLoad={handleImageLoad} // Call handleImageLoad when image is loaded
+                  onLoad={handleImageLoad}
                 />
                 {session && (
                   <button

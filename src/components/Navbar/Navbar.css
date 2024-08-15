@@ -116,7 +116,8 @@
 
   .logo-container {
     order: 0;
-    margin: 10px 0;
+    margin: 3px 0;
+    margin-right: 15px;
   }
 
   .right-links {
