@@ -66,7 +66,7 @@ button {
 }
 
 .request {
-  font-size: 30px;
+  font-size: 35px;
 }
 
 .image-wrapper {
@@ -135,8 +135,8 @@ button {
     max-width: calc(50% - 20px);
   }
   .banner-text {
-    font-size: 60px; /* Reduce font size for tablets */
-    padding-bottom: 5%; /* Adjust padding */
+    font-size: 60px;
+    padding-bottom: 5%;
   }
 }
 
@@ -146,16 +146,16 @@ button {
     max-width: 100%;
   }
   .banner-text {
-    font-size: 40px; /* Reduce font size for phones */
-    padding-bottom: 3%; /* Further adjust padding */
-    width: 80%; /* Ensure text fits well */
+    font-size: 40px;
+    padding-bottom: 3%;
+    width: 80%;
   }
 }
 
 @media (max-width: 320px) {
   .banner-text {
-    font-size: 30px; /* Further reduce font size for very small screens */
-    padding-bottom: 2%; /* Minimal padding */
-    width: 90%; /* More width allowance */
+    font-size: 30px;
+    padding-bottom: 2%;
+    width: 90%;
   }
 }

@@ -112,7 +112,7 @@ function Home() {
           width: "100%",
           height: "100%",
           zIndex: -1,
-          opacity: isFirstImageLoaded ? 1 : 0, // Ensure it's fully visible if the first image is loaded
+          opacity: isFirstImageLoaded ? 1 : 0,
           transition: "opacity 1s ease-in",
         }}
       ></div>

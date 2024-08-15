@@ -41,19 +41,19 @@
 }
 @media (max-width: 768px) {
   .banner-text {
-    padding-bottom: 50px; /* Adjust padding for smaller screens */
+    padding-bottom: 50px;
   }
 }
 
 @media (max-width: 480px) {
   .banner-text {
     font-size: 50px !important;
-    padding-bottom: 40px; /* Further adjust padding for phones */
+    padding-bottom: 40px;
   }
 }
 
 @media (max-width: 320px) {
   .banner-text {
-    padding-bottom: 30px; /* Smaller margin for very small screens */
+    padding-bottom: 30px;
   }
 }
