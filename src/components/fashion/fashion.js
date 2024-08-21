@@ -109,12 +109,18 @@ const Fashion = ({ session }) => {
             backgroundImage: `url(${banner})`,
           }}
         >
-          <p className='banner-text'>Fashion & Beauty</p>
+          <p className='banner-text'>Fashion</p>
         </div>
         <div className='text'>
           <p>
-            Capturing brand essence with elegance and clarity. Product
-            photography, lifestyle, hero shots, look books, editorial.
+            Bringing fashion and brand essence to life with elegance and
+            clarity, we offer a range of services, including product and brand
+            photography, look books, videography, modeling tests, and
+            portfolio-building sessions for models of all levels. Supported by
+            our talented hair and makeup stylists, as well as our expert
+            production and post-production team, we are dedicated to ensuring
+            our clients’ best interests are kept in mind throughout the entire
+            process.
           </p>
           <div className='requestF'>
             <p>

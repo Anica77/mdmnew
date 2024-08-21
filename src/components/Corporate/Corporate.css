@@ -10,7 +10,7 @@
 .banner {
   background-size: cover;
   background-position: center;
-  height: 300px;
+  height: 500px;
   position: relative;
   overflow: hidden;
 }
@@ -31,6 +31,7 @@
 .text {
   margin: 5%;
   text-align: justify;
+  font-size: 25px;
 }
 
 .grid {
@@ -133,6 +134,10 @@ button {
   .grid-item {
     flex: 1 1 calc(50% - 20px);
     max-width: calc(50% - 20px);
+  }
+
+  .banner {
+    height: 300px;
   }
   .banner-text {
     font-size: 60px;

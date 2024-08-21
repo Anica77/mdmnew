@@ -104,14 +104,13 @@ const Portraits = ({ session }) => {
         </div>
         <div className='text'>
           <p>
-            Whether it’s an acting headshot, personal portrait, personal brand
-            image, or family photographs, we will help you tell your story
-            creatively. CreativeCapture team will work closely with you to
-            capture the essence of your personality and the unique message you
-            want to convey. From professional lighting and composition to
-            post-production editing, we ensure every detail is perfect. Let us
-            transform your vision into stunning visuals that stand out and make
-            a lasting impression.
+            Whether it's an acting headshot, personal portrait, brand image, or
+            family photograph, we will help you tell your story creatively. The
+            CreativeCapture team will work closely with you to capture the
+            essence of your personality and the message you want to convey. From
+            professional lighting and composition to post-production and
+            editing, we ensure every detail is perfect. Let us transform your
+            vision into stunning visuals that leave a lasting impression.
           </p>
         </div>
         <div className='request'>

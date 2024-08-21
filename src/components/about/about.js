@@ -25,19 +25,18 @@ const About = () => {
         <div className='aboutText'>
           <h2>Maria Duchesne</h2>
           <p>
-            I am a self-taught photographer specializing in portraiture, beauty,
-            fashion, and product photography. With years of experience
-            photographing business professionals, entrepreneurs, artists.
+            I am a self-taught photographer with years of experience
+            specializing in portraiture, beauty, fashion, product, and food
+            photography. My work with business professionals, entrepreneurs,
+            creatives, and events has honed my expertise. I favor a clean and
+            modern style, which serves as an ideal foundation for incorporating
+            clients’ ideas and concepts into the creative process.
           </p>
           <p>
-            I prefer a clean and modern style of imagery as my default approach,
-            finding it the perfect starting point for bringing in clients' ideas
-            and concepts into the creative process.
-          </p>
-          <p>
-            I constantly seek to expand my skills through experimentation with
-            colors, techniques, and light, which can be seen throughout my
-            portfolio.
+            I work alongside a dedicated team of professionals, ensuring that
+            every project is executed with precision and creativity. Constantly
+            striving to expand my skills, I experiment with colors, techniques,
+            and lighting—a passion that is evident throughout my portfolio.
           </p>
           <a href='mailto:mduchesne@creativecaptureph.com'>
             mduchesne@creativecaptureph.com
