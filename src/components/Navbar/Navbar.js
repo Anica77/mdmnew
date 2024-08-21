@@ -24,55 +24,84 @@ const Navbar = ({ session, onLogout }) => {
         </div>
       </div>
       <div className='right-links'>
-        {/* Conditionally render the contact link or dropdown based on path and screen size */}
-        {isHomepage ? (
-          <Link className='link' to='/about'>
+        <div className='links-container'>
+          <Link
+            className={`link ${
+              location.pathname === "/corporate" ? "active" : ""
+            }`}
+            to='/corporate'
+          >
+            Business
+          </Link>
+          <Link
+            className={`link ${
+              location.pathname === "/fashion" ? "active" : ""
+            }`}
+            to='/fashion'
+          >
+            Fashion
+          </Link>
+          <Link
+            className={`link ${
+              location.pathname === "/portraits" ? "active" : ""
+            }`}
+            to='/portraits'
+          >
+            Portraits
+          </Link>
+          <Link
+            className={`link ${location.pathname === "/about" ? "active" : ""}`}
+            to='/about'
+          >
             Contact
           </Link>
-        ) : (
-          <>
-            <button className='dropdown-toggle' onClick={toggleDropdown}>
-              ☰ Categories
-            </button>
-            <div className={`links-container ${isDropdownOpen ? "open" : ""}`}>
-              <Link
-                className={`link ${
-                  location.pathname === "/corporate" ? "active" : ""
-                }`}
-                to='/corporate'
-                onClick={() => setIsDropdownOpen(false)}
-              >
-                Business
-              </Link>
-              <Link
-                className={`link ${
-                  location.pathname === "/fashion" ? "active" : ""
-                }`}
-                to='/fashion'
-                onClick={() => setIsDropdownOpen(false)}
-              >
-                Fashion
-              </Link>
-              <Link
-                className={`link ${
-                  location.pathname === "/portraits" ? "active" : ""
-                }`}
-                to='/portraits'
-                onClick={() => setIsDropdownOpen(false)}
-              >
-                Portraits
-              </Link>
-              <Link
-                className={`link ${
-                  location.pathname === "/about" ? "active" : ""
-                }`}
-                to='/about'
-                onClick={() => setIsDropdownOpen(false)}
-              >
-                Contact
-              </Link>
-            </div>
-          </>
+        </div>
+        <button className='dropdown-toggle' onClick={toggleDropdown}>
+          ☰ Menu
+        </button>
+        {isDropdownOpen && (
+          <div
+            className={`dropdown-menu ${
+              isHomepage ? "transparent-dropdown" : ""
+            }`}
+          >
+            <Link
+              className={`link ${
+                location.pathname === "/corporate" ? "active" : ""
+              }`}
+              to='/corporate'
+              onClick={() => setIsDropdownOpen(false)}
+            >
+              Business
+            </Link>
+            <Link
+              className={`link ${
+                location.pathname === "/fashion" ? "active" : ""
+              }`}
+              to='/fashion'
+              onClick={() => setIsDropdownOpen(false)}
+            >
+              Fashion
+            </Link>
+            <Link
+              className={`link ${
+                location.pathname === "/portraits" ? "active" : ""
+              }`}
+              to='/portraits'
+              onClick={() => setIsDropdownOpen(false)}
+            >
+              Portraits
+            </Link>
+            <Link
+              className={`link ${
+                location.pathname === "/about" ? "active" : ""
+              }`}
+              to='/about'
+              onClick={() => setIsDropdownOpen(false)}
+            >
+              Contact
+            </Link>
+          </div>
         )}
         {session ? (
           <button className='logoutButton' onClick={onLogout}>

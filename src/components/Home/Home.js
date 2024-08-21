@@ -117,11 +117,6 @@ function Home() {
         }}
       ></div>
       <h1>Welcome to Creative Capture</h1>
-      <div className='additional-links'>
-        <a href='/corporate'>Corporate</a>
-        <a href='/fashion'>Fashion&Beauty</a>
-        <a href='/portraits'>Portraits</a>
-      </div>
       <div className='spacer'></div>
       <div className='footer-homepage'>
         <a

@@ -4,7 +4,6 @@
   justify-content: space-between;
   align-items: center;
   height: 90vh;
-  font-family: Baskerville;
   position: relative; /* Ensure the container takes full space */
   overflow: hidden; /* Prevent overflow if necessary */
 }
@@ -80,8 +79,9 @@ h1 {
 .footer-homepage a {
   margin: 5px 0;
   text-decoration: none;
-  color: white;
-  text-shadow: -1.5px -1.5px 0 black;
+  color: black;
+  text-shadow: -0.5px -0.5px 0 white, 0.5px -0.5px 0 white, -0.5px 0.5px 0 white,
+    0.5px 0.5px 0 white;
   font-size: 25px;
 }
 
