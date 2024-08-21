@@ -130,18 +130,19 @@ const Corporate = ({ session }) => {
         </div>
         <div className='text'>
           <p>
-            Choose from our individual or group packages tailored to fit your
-            preferences. Whether you need striking headshots, vibrant business
-            lifestyle shots, or coverage for corporate events, we've got you
-            covered. Simply request a quote and share a few details about your
-            project. While you await our prompt reply, take a moment to scroll
-            through our gallery.
+            Whether you need impactful headshots, dynamic business lifestyle
+            images, or corporate event coverage, we’re here to help. As soon as
+            you book your session, you can rely on our team for full support
+            throughout the process. From the initial shoot to the timely
+            delivery of your final images, your positive experience is our top
+            priority.
           </p>
           <p>
-            Upon scheduling your session, you can trust that our team will
-            provide comprehensive support and assistance throughout the entire
-            process. From the initial shoot to the timely delivery of your final
-            images, we are committed to ensuring your complete satisfaction.
+            We offer a variety of packages, including professional headshots,
+            corporate packages for teams, and event photography. Just request a
+            quote and provide a few details about your project. While we work on
+            your quote, feel free to browse our gallery or read what our clients
+            have shared.
           </p>
         </div>
         <div className='reviews'>

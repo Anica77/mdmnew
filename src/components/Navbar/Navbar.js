@@ -51,7 +51,7 @@ const Navbar = ({ session, onLogout }) => {
                 to='/fashion'
                 onClick={() => setIsDropdownOpen(false)}
               >
-                Fashion and Beauty
+                Fashion
               </Link>
               <Link
                 className={`link ${

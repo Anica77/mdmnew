@@ -1,8 +1,5 @@
-.reviewBody {
-  font-family: Baskervville, sans-serif;
-}
 .reviewContainer {
-  font-family: Baskervville, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   align-items: center;
   flex-direction: row;
