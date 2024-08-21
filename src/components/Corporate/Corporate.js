@@ -180,6 +180,7 @@ const Corporate = ({ session }) => {
         </div>
         {session && (
           <div className='uploadPhoto'>
+            <h2>Upload Image</h2>
             <input type='file' onChange={handleFileChange} />
             <button onClick={handleUpload}>Upload</button>
             {uploadStatus && <p>{uploadStatus}</p>}
