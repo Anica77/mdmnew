@@ -11,11 +11,12 @@
 h1 {
   margin-top: 30px;
   color: black;
-  text-shadow: -0.5px -0.5px 0 white, 0.5px -0.5px 0 white, -0.5px 0.5px 0 white,
-    0.5px 0.5px 0 white;
+  /* text-shadow: -0.5px -0.5px 0 white, 0.5px -0.5px 0 white, -0.5px 0.5px 0 white,
+    0.5px 0.5px 0 white; */
   opacity: 0;
   animation: fadeInOut 6s ease-in-out forwards;
-  font-size: 45px;
+  font-size: 40px;
+  font-family: Futura;
 }
 
 @keyframes fadeIn {
@@ -57,15 +58,6 @@ h1 {
   width: 100%;
 }
 
-.footer-homepage a {
-  margin: 5px 0;
-  text-decoration: none;
-  color: black;
-  text-shadow: -0.5px -0.5px 0 white, 0.5px -0.5px 0 white, -0.5px 0.5px 0 white,
-    0.5px 0.5px 0 white;
-  font-size: 25px;
-}
-
 #background-container {
   position: fixed; /* Ensure it covers the entire viewport */
   top: 0;
@@ -81,23 +73,13 @@ h1 {
 
 /* Media Query for Mobile Devices */
 @media (max-width: 768px) {
-  .page-container {
-    height: 100vh; /* Adjust height to fit mobile screen */
-  }
-
-  .additional-links {
-    flex-direction: column; /* Stack links vertically on mobile */
-    font-size: 40px; /* Adjust font size for smaller screens */
-    align-items: center; /* Center links horizontally */
-  }
-
-  .additional-links a {
-    font-size: 50px; /* Adjust link size for smaller screens */
-    margin: 10px 0; /* Adjust margin for vertical spacing */
-  }
-
   .footer-homepage {
-    height: auto; /* Adjust footer height for mobile */
+    height: auto;
+    padding: 10px 0; /* Add padding for better visibility */
+    width: 100%;
+    text-align: center;
+    position: sticky;
+    bottom: 0;
   }
 
   .footer-homepage a {

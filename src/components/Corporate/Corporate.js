@@ -3,7 +3,7 @@ import supabase, { deletePhoto, uploadPhoto, getReviews } from "../Supabase";
 import Masonry from "masonry-layout";
 import imagesLoaded from "imagesloaded";
 import "./Corporate.css";
-import banner from "./IMG_5757OPT.jpg";
+import banner from "./DSC09294-min.jpg";
 import ReviewCarousel from "../reviews/ReviewCarousel";
 
 const Corporate = ({ session }) => {

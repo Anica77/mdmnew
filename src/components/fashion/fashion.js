@@ -3,7 +3,7 @@ import supabase, { deletePhoto, uploadPhoto } from "../Supabase";
 import Masonry from "masonry-layout";
 import imagesLoaded from "imagesloaded";
 import "./fashion.css";
-import banner from "./IMG_9075OPT.jpg";
+import banner from "./IMG_6330-min.jpg";
 
 const Fashion = ({ session }) => {
   const [data, setData] = useState([]);

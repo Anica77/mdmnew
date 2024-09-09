@@ -22,7 +22,7 @@ function ReviewsCarousel({ reviews }) {
         <p>Loading...</p>
       ) : (
         <div>
-          <h2>Reviews</h2>
+          <p className='Reviews'>Reviews</p>
           <div className='reviewContainer'>
             <button className='prev' onClick={prevReview}></button>
             <p className='reviewText'>{reviews[currentReviewIndex].text}</p>

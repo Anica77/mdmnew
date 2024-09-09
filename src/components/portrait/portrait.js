@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Masonry from "masonry-layout";
 import imagesLoaded from "imagesloaded";
 import supabase, { deletePhoto, uploadPhoto } from "../Supabase";
-import banner from "./33OPT.jpg";
+import banner from "./IMG_3340-min.jpg";
 import "./portrait.css";
 
 const Portraits = ({ session }) => {
@@ -106,7 +106,7 @@ const Portraits = ({ session }) => {
           <p>
             Whether it's an acting headshot, personal portrait, brand image, or
             family photograph, we will help you tell your story creatively. The
-            CreativeCapture team will work closely with you to capture the
+            Creative Capture team will work closely with you to capture the
             essence of your personality and the message you want to convey. From
             professional lighting and composition to post-production and
             editing, we ensure every detail is perfect. Let us transform your
