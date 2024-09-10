@@ -125,7 +125,7 @@ function Home() {
           rel='noopener noreferrer'
         >
           <img
-            src='./instagramIcon.png'
+            src='./InstagramIcon.png'
             alt='Instagram'
             style={{ width: "24px", height: "24px" }}
           />
