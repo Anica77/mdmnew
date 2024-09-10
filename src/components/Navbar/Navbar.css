@@ -50,12 +50,16 @@
 .right-links {
   display: flex;
   align-items: center;
-  transition: text-shadow 0.3s ease;
+  transition: text-shadow 0.3s ease, font-weight 0.3s ease; /* Add smooth transition for both text-shadow and font-weight */
+  font-weight: 400;
 }
 
 .right-links:hover {
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
-    0 0 20px rgba(255, 255, 255, 0.5);
+  color: #333;
+  transform: scale(1.02);
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.6),
+    0 0 12px rgba(255, 255, 255, 0.4); /* Softer, more elegant glow */
+  font-weight: 500;
 }
 
 .link {
