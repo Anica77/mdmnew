@@ -10,7 +10,7 @@
 
 h1 {
   margin-top: 30px;
-  color: black;
+  color: white;
   /* text-shadow: -0.5px -0.5px 0 white, 0.5px -0.5px 0 white, -0.5px 0.5px 0 white,
     0.5px 0.5px 0 white; */
   opacity: 0;
@@ -56,6 +56,10 @@ h1 {
   justify-content: center;
   align-items: center;
   width: 100%;
+}
+
+.footer-homepage a {
+  padding: 10px;
 }
 
 #background-container {

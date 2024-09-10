@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Masonry from "masonry-layout";
 import imagesLoaded from "imagesloaded";
 import supabase, { deletePhoto, uploadPhoto } from "../Supabase";
-import banner from "./IMG_3340-min.jpg";
+import banner from "./portBanner.jpg";
 import "./portrait.css";
 
 const Portraits = ({ session }) => {
