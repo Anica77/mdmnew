@@ -1,5 +1,5 @@
 .corporate_container {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Futura;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -17,7 +17,7 @@
 
 .banner-text {
   position: absolute;
-  font-family: Baskervville, sans-serif;
+  font-family: Futura;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -31,7 +31,7 @@
 .text {
   margin: 5%;
   text-align: justify;
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .grid {
@@ -58,7 +58,7 @@
 
 button {
   background-color: white;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Futura;
   color: black;
   border: 1px solid black;
   width: fit-content;
@@ -67,7 +67,22 @@ button {
 }
 
 .request {
-  font-size: 35px;
+  font-size: 30px;
+  padding: 10px 20px; /* Adds space around the text */
+  border: 2px solid black; /* Black border for minimalism */
+  color: black; /* Black text color */
+  text-align: center; /* Center the text */
+  cursor: pointer; /* Change the cursor to a pointer on hover */
+  display: inline-block; /* Makes it behave like a button */
+  transition: all 0.3s ease; /* Smooth transition for hover effect */
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.request:hover {
+  /* background-color: gray; 
+  color: white;  */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
 .image-wrapper {

@@ -124,7 +124,11 @@ function Home() {
           target='_blank'
           rel='noopener noreferrer'
         >
-          Instagram
+          <img
+            src='./instagramIcon.png'
+            alt='Instagram'
+            style={{ width: "24px", height: "24px" }}
+          />
         </a>
       </div>
     </div>
