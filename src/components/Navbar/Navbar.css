@@ -5,7 +5,7 @@
   align-items: center;
   height: 90px;
   padding: 0 20px;
-  border-bottom: 1px solid black;
+  /* border-bottom: 1px solid black; */
   font-size: 30px;
   font-family: Futura;
   background-color: transparent;
@@ -50,8 +50,12 @@
 .right-links {
   display: flex;
   align-items: center;
-  /* text-shadow: -0.5px -0.5px 0 white, 0.5px -0.5px 0 white, -0.5px 0.5px 0 white,
-    0.5px 0.5px 0 white; */
+  transition: text-shadow 0.3s ease;
+}
+
+.right-links:hover {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+    0 0 20px rgba(255, 255, 255, 0.5);
 }
 
 .link {
@@ -83,6 +87,8 @@
   justify-content: flex-end;
   /* text-shadow: -0.5px -0.5px 0 white, 0.5px -0.5px 0 white, -0.5px 0.5px 0 white,
     0.5px 0.5px 0 white; */
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+    0 0 20px rgba(255, 255, 255, 0.5);
 }
 
 .links-container {
@@ -125,6 +131,7 @@
     align-items: center;
     height: auto;
     padding: 10px;
+    border-bottom: 1px solid black;
   }
 
   .logo-container {
