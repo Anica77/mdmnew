@@ -54,7 +54,7 @@
   font-weight: 400;
 }
 
-.right-links:hover {
+.link:hover {
   color: #333;
   transform: scale(1.02);
   text-shadow: 0 0 6px rgba(255, 255, 255, 0.6),
