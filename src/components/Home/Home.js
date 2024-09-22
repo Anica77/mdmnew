@@ -51,7 +51,7 @@ function Home() {
                   const newIndex = (prevIndex + 1) % validImages.length;
                   return newIndex;
                 });
-              }, 7000);
+              }, 5000);
 
               return () => clearInterval(intervalId);
             }
